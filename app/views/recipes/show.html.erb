@@ -1,0 +1,10 @@
+<p><%= notice %></p>
+
+<h1>Recipe Details</h1>
+
+<p>Name: <%= @recipe.name %></p>
+<p>Notes: <%= @recipe.notes %></p>
+<p>Time: <%= @recipe.time_in_minutes %> minutes</p>
+<p>Servings: <%= @recipe.servings %></p>
+<p>Ingredients: <%= simple_format @recipe.ingredients %></p>
+<p>Directions: <%= simple_format @recipe.directions %></p>
