@@ -3,8 +3,18 @@
 <h1>Recipe Details</h1>
 
 <p>Name: <%= @recipe.name %></p>
-<p>Notes: <%= @recipe.notes %></p>
-<p>Time: <%= @recipe.time_in_minutes %> minutes</p>
-<p>Servings: <%= @recipe.servings %></p>
+
+<% unless @recipe.notes.blank? %>
+  <p>Notes: <%= @recipe.notes %></p>
+<% end %>
+
+<% unless @recipe.time_in_minutes.blank? %>
+  <p>Time: <%= @recipe.time_in_minutes %> minutes</p>
+<% end %>
+
+<% unless @recipe.servings.blank? %>
+  <p>Servings: <%= @recipe.servings %></p>
+<% end %>
+
 <p>Ingredients: <%= simple_format @recipe.ingredients %></p>
 <p>Directions: <%= simple_format @recipe.directions %></p>

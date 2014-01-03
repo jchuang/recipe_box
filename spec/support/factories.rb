@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :recipe do
-    name 'green eggs and ham'
+    name 'tasty food'
     ingredients 'here are the ingredients'
     directions 'here are the directions'
     visibility 'Public'

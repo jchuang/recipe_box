@@ -32,9 +32,33 @@ feature 'user adds recipe', %q{
     fill_in 'Servings', with: '2'
 
     click_on 'Create Recipe'
-    save_and_open_page
     expect(page).to have_content 'Recipe was successfully added.'
     expect(page).to have_content 'Green Eggs and Ham'
+  end
+
+  scenario 'required information is not provided' do
+    visit 'recipes/new'
+    click_on 'Create Recipe'
+
+    expect(page).to have_content "can't be blank"
+    expect(page).to_not have_content 'Recipe was successfully added'
+  end
+
+  scenario 'create a recipe without some optional fields' do
+    recipe = FactoryGirl.build(:recipe)
+
+    visit 'recipes/new'
+
+    fill_in 'Name', with: recipe.name
+    fill_in 'Ingredients', with: recipe.ingredients
+    fill_in 'Directions', with: recipe.directions
+    fill_in 'Servings', with: '4'
+
+    click_on 'Create Recipe'
+
+    expect(page).to have_content 'Servings'
+    expect(page).to_not have_content 'Time'
+    expect(page).to_not have_content 'Notes'
   end
 
 end
