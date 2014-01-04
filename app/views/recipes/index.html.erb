@@ -1,0 +1,18 @@
+<p class="notice"><%= notice %></p>
+
+<h1>My Recipes</h1>
+
+<table>
+  <tr>
+    <th>Recipe</th>
+    <th></th>
+  </tr>
+
+<% @recipes.each do |recipe| %>
+  <tr>
+    <th><%= link_to recipe.name, recipe_path(recipe) %></th>
+    <th><%= link_to 'Delete Recipe', recipe_path(recipe), method: :delete %></th>
+  </tr>
+<% end %>
+
+</table>

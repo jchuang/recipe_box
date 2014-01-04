@@ -8,6 +8,10 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
   end
 
+  def index
+    @recipes = Recipe.all
+  end
+
   def create
     @recipe = Recipe.new(recipe_params)
 
@@ -16,6 +20,12 @@ class RecipesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def destroy
+    @recipe = Recipe.find(params[:id])
+    @recipe.destroy
+    redirect_to recipes_path, notice: 'Recipe was successfully deleted.'
   end
 
   private

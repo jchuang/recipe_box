@@ -1,4 +1,4 @@
-<p><%= notice %></p>
+<p class="notice"><%= notice %></p>
 
 <h1>Recipe Details</h1>
 
@@ -18,3 +18,7 @@
 
 <p>Ingredients: <%= simple_format @recipe.ingredients %></p>
 <p>Directions: <%= simple_format @recipe.directions %></p>
+
+<h2>Actions</h2>
+
+<p><%= link_to 'Delete Recipe', recipe_path(@recipe), method: :delete %></p>
