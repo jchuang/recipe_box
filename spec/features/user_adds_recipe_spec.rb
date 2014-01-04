@@ -44,7 +44,7 @@ feature 'user adds recipe', %q{
     expect(page).to_not have_content 'Recipe was successfully added'
   end
 
-  scenario 'create a recipe without some optional fields' do
+  scenario 'Save a recipe without some optional fields' do
     recipe = FactoryGirl.build(:recipe)
 
     visit 'recipes/new'
