@@ -40,8 +40,17 @@ feature 'user adds recipe', %q{
     visit 'recipes/new'
     click_on 'Create Recipe'
 
-    expect(page).to have_content "can't be blank"
-    expect(page).to_not have_content 'Recipe was successfully added'
+    expect(page).to_not have_content 'Recipe was successfully added.'
+
+    within ".input.recipe_name" do
+      expect(page).to have_content "can't be blank"
+    end
+    within ".input.recipe_ingredients" do
+      expect(page).to have_content "can't be blank"
+    end
+    within ".input.recipe_directions" do
+      expect(page).to have_content "can't be blank"
+    end
   end
 
   scenario 'Save a recipe without some optional fields' do

@@ -14,7 +14,7 @@ feature 'user edits recipe', %q{
   scenario 'desired edits include all required fields' do
     recipe = FactoryGirl.create(:recipe)
 
-    visit "recipes/#{recipe.id}"
+    visit recipe_path(recipe)
     click_on 'Edit Recipe'
 
     fill_in 'Name', with: 'delicious foods'
@@ -29,6 +29,28 @@ feature 'user edits recipe', %q{
     expect(page).to have_content 'chocolate stout'
   end
 
-  scenario 'a required field is empty'
+  scenario 'a required field is empty' do
+    recipe = FactoryGirl.create(:recipe)
+
+    visit recipe_path(recipe)
+    click_on 'Edit Recipe'
+
+    fill_in 'Name', with: ''
+    fill_in 'Ingredients', with: ''
+    fill_in 'Directions', with: ''
+    click_on 'Update Recipe'
+
+    expect(page).to_not have_content 'Recipe was successfully updated.'
+
+    within ".input.recipe_name" do
+      expect(page).to have_content "can't be blank"
+    end
+    within ".input.recipe_ingredients" do
+      expect(page).to have_content "can't be blank"
+    end
+    within ".input.recipe_directions" do
+      expect(page).to have_content "can't be blank"
+    end
+  end
 
 end
