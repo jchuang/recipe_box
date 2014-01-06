@@ -1,4 +1,4 @@
-<p class="notice"><%= notice %></p>
+<p id="notice"><%= notice %></p>
 
 <h1>Recipe Details</h1>
 
@@ -19,9 +19,8 @@
 <p>Ingredients: <%= simple_format @recipe.ingredients %></p>
 <p>Directions: <%= simple_format @recipe.directions %></p>
 
-<h2>Actions</h2>
-
-<p><%= link_to 'Edit Recipe', edit_recipe_path(@recipe) %></p>
-
-<p><%= link_to 'Delete Recipe', recipe_path(@recipe), method: :delete %></p>
-
+<p>
+  <%= link_to 'Edit Recipe', edit_recipe_path(@recipe) %> |
+  <%= link_to 'Delete Recipe', recipe_path(@recipe), method: :delete %> |
+  <%= link_to 'Back to Recipes', recipes_path %>
+</p>

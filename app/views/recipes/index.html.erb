@@ -1,13 +1,9 @@
-<p class="notice"><%= notice %></p>
+<p id="notice"><%= notice %></p>
 
 <h1>My Recipes</h1>
 
-<table>
-  <tr>
-    <th>Recipe</th>
-    <th></th>
-  </tr>
+<% @recipes.each do |recipe| %>
+  <p><%= link_to recipe.name, recipe_path(recipe) %></p>
+<% end %>
 
-<%= render partial: 'recipe', collection: @recipes %>
-
-</table>
+<p><%= link_to 'Add New Recipe', new_recipe_path %></p>

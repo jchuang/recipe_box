@@ -12,7 +12,7 @@ feature 'user deletes recipe', %q{
 
   scenario 'when recipe belongs to user' do
     recipe = FactoryGirl.create(:recipe)
-    visit recipes_path
+    visit recipe_path(recipe)
     expect(page).to have_content 'tasty food'
 
     click_on 'Delete Recipe'
