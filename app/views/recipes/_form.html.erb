@@ -1,11 +1,48 @@
-<%= simple_form_for @recipe do |f| %>
+<% if @recipe.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
 
-  <%= f.input :name %>
-  <%= f.input :ingredients %>
-  <%= f.input :directions %>
-  <%= f.input :notes %>
-  <%= f.input :time_in_minutes, label: 'Time' %>
-  <%= f.input :servings %>
-  <%= f.button :submit %>
+    <ul>
+    <% @recipe.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for @recipe do |f| %>
+
+  <div class="input">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="input">
+    <%= f.label :ingredients %>
+    <%= f.text_area :ingredients %>
+  </div>
+  <div class="input">
+    <%= f.label :directions %>
+    <%= f.text_area :directions %>
+  </div>
+  <div class="input">
+    <%= f.label :notes %>
+    <%= f.text_field :notes %>
+  </div>
+
+  <div class="input">
+    <%= f.label :time_number %>
+    <%= f.text_field :time_number %>
+
+    <%= f.label :time_unit %>
+    <%= f.select :time_unit, ['minutes', 'hours'] %>
+  </div>
+
+  <div class="input">
+    <%= f.label :servings %>
+    <%= f.text_field :servings %>
+  </div>
+  <div class="submit">
+    <%= f.submit %>
+  </div>
 
 <% end %>

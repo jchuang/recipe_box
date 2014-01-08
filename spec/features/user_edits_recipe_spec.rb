@@ -41,16 +41,9 @@ feature 'user edits recipe', %q{
     click_on 'Update Recipe'
 
     expect(page).to_not have_content 'Recipe was successfully updated.'
-
-    within ".input.recipe_name" do
-      expect(page).to have_content "can't be blank"
-    end
-    within ".input.recipe_ingredients" do
-      expect(page).to have_content "can't be blank"
-    end
-    within ".input.recipe_directions" do
-      expect(page).to have_content "can't be blank"
-    end
+    expect(page).to have_content "Name can't be blank"
+    expect(page).to have_content "Ingredients can't be blank"
+    expect(page).to have_content "Directions can't be blank"
   end
 
 end
