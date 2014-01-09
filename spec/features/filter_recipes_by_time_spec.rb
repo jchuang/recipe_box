@@ -43,4 +43,15 @@ feature 'find recipes by time required', %q{
     expect(page).to_not have_content 'slow recipe'
   end
 
+  scenario 'does not display recipes where no time is provided' do
+    untimed = FactoryGirl.create(:recipe)
+    fast = FactoryGirl.create(:recipe, :fast)
+
+    visit recipes_path
+    fill_in 'minutes', with: '45'
+    click_on 'Filter'
+
+    expect(page).to have_content fast.name
+    expect(page).to_not have_content untimed.name
+  end
 end
