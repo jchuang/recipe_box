@@ -9,21 +9,21 @@ FactoryGirl.define do
     visibility 'Public'
 
     trait :fast do
+      sequence(:name) { |n| "fast recipe #{n}"}
       time_number '15'
       time_unit 'minutes'
-      name 'fast recipe'
     end
 
     trait :medium do
+      sequence(:name) { |n| "medium recipe #{n}"}
       time_number '30'
       time_unit 'minutes'
-      name 'medium recipe'
     end
 
     trait :slow do
+      sequence(:name) { |n| "slow recipe #{n}"}
       time_number '1.5'
       time_unit 'hours'
-      name 'slow recipe'
     end
   end
 

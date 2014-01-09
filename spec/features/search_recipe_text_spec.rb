@@ -58,4 +58,21 @@ feature 'search recipes based on keywords', %q{
     expect(page).to have_content recipe.name
     expect(page).to_not have_content other_recipe.name
   end
+
+  scenario 'matches text and filters by time' do
+    fast_recipe = FactoryGirl.create(:recipe, :fast)
+    fast_lentil_recipe = FactoryGirl.create(:recipe, :fast, directions: 'Add lentils to soup. Stir well.')
+    slow_recipe = FactoryGirl.create(:recipe, :slow)
+    slow_lentil_recipe = FactoryGirl.create(:recipe, :slow, ingredients: 'lentils, tomatoes, kale, onions, carrots')
+
+    visit recipes_path
+    fill_in 'Keywords', with: 'lentil'
+    fill_in 'minutes', with: '45'
+    click_on 'Search Recipes'
+
+    expect(page).to have_content fast_lentil_recipe.name
+    expect(page).to_not have_content fast_recipe.name
+    expect(page).to_not have_content slow_recipe.name
+    expect(page).to_not have_content slow_lentil_recipe.name
+  end
 end
