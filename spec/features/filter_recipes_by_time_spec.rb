@@ -16,14 +16,14 @@ feature 'find recipes by time required', %q{
 
     visit edit_recipe_path(recipe)
     fill_in 'Time', with: '90'
-    select 'minutes', from: 'time_unit'
+    select 'minutes', from: 'Unit'
     click_on 'Update Recipe'
 
     expect(page).to have_content 'Time: 90 minutes'
 
-    visit edit_recipe_path(recipe)
+    click_on 'Edit Recipe'
     fill_in 'Time', with: '1.5'
-    select 'hours', from: 'time_unit'
+    select 'hours', from: 'Unit'
     click_on 'Update Recipe'
 
     expect(page).to have_content 'Time: 1.5 hours'

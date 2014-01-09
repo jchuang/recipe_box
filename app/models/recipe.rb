@@ -6,22 +6,6 @@ class Recipe < ActiveRecord::Base
 
   before_save :calculate_time
 
-  def time_number=(value)
-    @time_number = value
-  end
-
-  def time_number
-    @time_number ||= time_in_minutes
-  end
-
-  def time_unit=(value)
-    @time_unit = value
-  end
-
-  def time_unit
-    @time_unit ||= "minutes"
-  end
-
   private
 
   def calculate_time
