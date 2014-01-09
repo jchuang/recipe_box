@@ -29,4 +29,19 @@ feature 'find recipes by time required', %q{
     expect(page).to have_content 'Time: 1.5 hours'
   end
 
+  scenario 'displays recipes that meet time requirement' do
+    FactoryGirl.create(:recipe, :fast)
+    FactoryGirl.create(:recipe, :medium)
+    FactoryGirl.create(:recipe, :slow)
+
+    visit recipes_path
+    fill_in 'Maximum Time', with: '45'
+    select 'minutes', from: 'Unit'
+    click_on 'Find Recipes'
+
+    expect(page).to have_content 'fast recipe'
+    expect(page).to have_content 'medium recipe'
+    expect(page).to_not have_content 'slow recipe'
+  end
+
 end
