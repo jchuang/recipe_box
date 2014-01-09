@@ -35,8 +35,27 @@ feature 'search recipes based on keywords', %q{
     expect(page).to_not have_content other_recipe.name
   end
 
-  scenario 'matches text in ingredients'
+  scenario 'matches text in ingredients' do
+    recipe = FactoryGirl.create(:recipe, ingredients: 'lentils, tomatoes, kale, onions, carrots')
+    other_recipe = FactoryGirl.create(:recipe)
 
-  scenario 'matches text in directions'
+    visit recipes_path
+    fill_in 'Keywords', with: 'kale lentil'
+    click_on 'Search Recipes'
 
+    expect(page).to have_content recipe.name
+    expect(page).to_not have_content other_recipe.name
+  end
+
+  scenario 'matches text in directions' do
+    recipe = FactoryGirl.create(:recipe, directions: 'Add lentils to soup. Stir well.')
+    other_recipe = FactoryGirl.create(:recipe)
+
+    visit recipes_path
+    fill_in 'Keywords', with: 'lentil soup'
+    click_on 'Search Recipes'
+
+    expect(page).to have_content recipe.name
+    expect(page).to_not have_content other_recipe.name
+  end
 end
