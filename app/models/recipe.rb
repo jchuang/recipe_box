@@ -10,6 +10,10 @@ class Recipe < ActiveRecord::Base
     Recipe.where("time_in_minutes <= ?", minutes).where("time_in_minutes IS NOT NULL")
   end
 
+  def self.search_text(keywords)
+    Recipe.where("to_tsvector(name || ' ' || ingredients || ' ' || directions) @@ plainto_tsquery(?)", keywords)
+  end
+
   private
 
   def calculate_time

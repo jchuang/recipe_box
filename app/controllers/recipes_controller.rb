@@ -47,6 +47,8 @@ class RecipesController < ApplicationController
   def filter_recipes(params)
     if params[:filter] == 'time-required'
       Recipe.maximum_time(params[:minutes].to_i)
+    elsif params[:filter] == 'search'
+      Recipe.search_text(params[:keywords])
     else
       Recipe.all
     end

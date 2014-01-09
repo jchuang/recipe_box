@@ -36,7 +36,7 @@ feature 'find recipes by time required', %q{
 
     visit recipes_path
     fill_in 'minutes', with: '45'
-    click_on 'Filter'
+    click_on 'Filter Recipes'
 
     expect(page).to have_content 'fast recipe'
     expect(page).to have_content 'medium recipe'
@@ -49,7 +49,7 @@ feature 'find recipes by time required', %q{
 
     visit recipes_path
     fill_in 'minutes', with: '45'
-    click_on 'Filter'
+    click_on 'Filter Recipes'
 
     expect(page).to have_content fast.name
     expect(page).to_not have_content untimed.name

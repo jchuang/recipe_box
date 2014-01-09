@@ -3,6 +3,19 @@
 <h1>Recipes</h1>
 
 <%= form_tag(recipes_path, method: :get) do %>
+  <%= field_set_tag 'Search Recipes' do %>
+    <%= hidden_field_tag 'filter', 'search' %>
+
+    <div>
+      <%= label_tag 'keywords', 'Keywords' %>
+      <%= text_field_tag 'keywords', placeholder: 'Search recipe name, ingredients, and directions...', size: 50 %>
+    </div>
+
+    <div><%= submit_tag 'Search Recipes' %></div>
+  <% end %>
+<% end %>
+
+<%= form_tag(recipes_path, method: :get) do %>
   <%= field_set_tag 'Time Required' do %>
     <%= hidden_field_tag 'filter', 'time-required' %>
 
@@ -10,7 +23,7 @@
       Display recipes that can be made in under <%= text_field_tag 'minutes', params[:minutes] || 30, size: 4 %> minutes:
     </div>
 
-    <div><%= submit_tag 'Filter' %></div>
+    <div><%= submit_tag 'Filter Recipes' %></div>
   <% end %>
 <% end %>
 
