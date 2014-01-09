@@ -3,7 +3,7 @@
 FactoryGirl.define do
 
   factory :recipe do
-    name 'tasty food'
+    sequence(:name) { |n| "tasty food #{n}" }
     ingredients 'here are the ingredients'
     directions 'here are the directions'
     visibility 'Public'
