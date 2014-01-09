@@ -9,7 +9,7 @@
 <% end %>
 
 <% unless @recipe.time_in_minutes.blank? %>
-  <p>Time: <%= @recipe.time_in_minutes %> minutes</p>
+  <p>Time: <%= @recipe.time_number %> <%= @recipe.time_unit %></p>
 <% end %>
 
 <% unless @recipe.servings.blank? %>

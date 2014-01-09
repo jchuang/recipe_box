@@ -4,9 +4,23 @@ class Recipe < ActiveRecord::Base
   validates :ingredients, presence: true
   validates :directions, presence: true
 
-  attr_accessor :time_number, :time_unit
+  before_save :calculate_time
 
-  before_save :calculate_time, on: [:create, :update]
+  def time_number=(value)
+    @time_number = value
+  end
+
+  def time_number
+    @time_number ||= time_in_minutes
+  end
+
+  def time_unit=(value)
+    @time_unit = value
+  end
+
+  def time_unit
+    @time_unit ||= "minutes"
+  end
 
   private
 
