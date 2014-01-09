@@ -1,6 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<h1>My Recipes</h1>
+<h1>Recipes</h1>
+
+<%= form_tag(recipes_path, method: :get) do %>
+  <%= field_set_tag 'Time Required' do %>
+    <%= hidden_field_tag 'filter', 'time-required' %>
+
+    <div>
+      Display recipes that can be made in under <%= text_field_tag 'minutes', params[:minutes] || 30, size: 4 %> minutes:
+    </div>
+
+    <div><%= submit_tag 'Filter' %></div>
+  <% end %>
+<% end %>
 
 <% @recipes.each do |recipe| %>
   <p><%= link_to recipe.name, recipe_path(recipe) %></p>

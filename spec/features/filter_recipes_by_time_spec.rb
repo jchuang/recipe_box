@@ -35,9 +35,8 @@ feature 'find recipes by time required', %q{
     FactoryGirl.create(:recipe, :slow)
 
     visit recipes_path
-    fill_in 'Maximum Time', with: '45'
-    select 'minutes', from: 'Unit'
-    click_on 'Find Recipes'
+    fill_in 'minutes', with: '45'
+    click_on 'Filter'
 
     expect(page).to have_content 'fast recipe'
     expect(page).to have_content 'medium recipe'

@@ -9,7 +9,7 @@ class RecipesController < ApplicationController
   end
 
   def index
-    @recipes = Recipe.all
+    @recipes = filter_recipes(params)
   end
 
   def create
@@ -43,6 +43,14 @@ class RecipesController < ApplicationController
   end
 
   private
+
+  def filter_recipes(params)
+    if params[:filter] == 'time-required'
+      Recipe.maximum_time(params[:minutes].to_i)
+    else
+      Recipe.all
+    end
+  end
 
   def recipe_params
     params.require(:recipe).permit(:name, :time_number, :time_unit, :servings,

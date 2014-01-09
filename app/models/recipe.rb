@@ -6,6 +6,10 @@ class Recipe < ActiveRecord::Base
 
   before_save :calculate_time
 
+  def self.maximum_time(minutes)
+    Recipe.where("time_in_minutes <= ?", minutes)
+  end
+
   private
 
   def calculate_time
