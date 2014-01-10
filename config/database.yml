@@ -17,6 +17,14 @@ test:
   username:
   password:
 
+staging:
+  adapter: postgresql
+  encoding: unicode
+  database: recipe_box_staging
+  pool: 5
+  username:
+  password:
+
 production:
   adapter: postgresql
   encoding: unicode

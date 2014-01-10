@@ -34,6 +34,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :production, :staging do
+  gem 'rails_12factor'
+end
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
@@ -49,6 +53,8 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
 end
+
+ruby "2.0.0"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
