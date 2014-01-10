@@ -36,6 +36,19 @@ feature 'user adds recipe', %q{
     expect(page).to have_content 'Green Eggs and Ham'
   end
 
+  scenario 'create a duplicate recipe' do
+    recipe = FactoryGirl.create(:recipe)
+    visit 'recipes/new'
+
+    fill_in 'Name', with: recipe.name
+    fill_in 'Ingredients', with: 'some ingredients'
+    fill_in 'Directions', with: 'some directions'
+
+    click_on 'Create Recipe'
+    expect(page).to have_content 'Name has already been taken'
+    expect(page).to_not have_content 'Recipe was successfully added.'
+  end
+
   scenario 'required information is not provided' do
     visit 'recipes/new'
     click_on 'Create Recipe'

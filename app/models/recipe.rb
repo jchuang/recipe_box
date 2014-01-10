@@ -1,6 +1,6 @@
 class Recipe < ActiveRecord::Base
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :ingredients, presence: true
   validates :directions, presence: true
 
