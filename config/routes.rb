@@ -1,4 +1,5 @@
 RecipeBox::Application.routes.draw do
+  root to: 'recipes#index'
   resources :recipes
 
   # The priority is based upon order of creation: first created -> highest priority.
