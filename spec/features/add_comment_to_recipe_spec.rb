@@ -26,6 +26,19 @@ feature 'comment on recipe', %q{
     expect(page).to have_content 'this was great!'
   end
 
+  scenario 'add multiple comments to recipe' do
+    recipe = FactoryGirl.create(:recipe)
+    comment1 = FactoryGirl.create(:comment, title: 'this one has a title', recipe: recipe)
+    comment2 = FactoryGirl.create(:comment, recipe: recipe)
+    comment3 = FactoryGirl.create(:comment, recipe: recipe)
+
+    visit recipe_path(recipe)
+    expect(page).to have_content recipe.name
+    expect(page).to have_content comment1.body
+    expect(page).to have_content comment2.body
+    expect(page).to have_content comment3.body
+  end
+
   scenario 'invalid comment with no text' do
     recipe = FactoryGirl.create(:recipe)
     visit recipe_path(recipe)

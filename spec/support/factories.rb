@@ -28,7 +28,7 @@ FactoryGirl.define do
   end
 
   factory :comment do
-    body 'this was terrific'
+    sequence(:body) { |n| "comment text #{n}" }
     recipe
   end
 
