@@ -6,6 +6,8 @@ describe Recipe do
   it { should validate_presence_of :ingredients }
   it { should validate_presence_of :directions }
 
+  it { should have_many(:comments).dependent(:destroy) }
+
   describe '#calculate_time' do
 
     it 'sets the correct time when minutes are provided' do

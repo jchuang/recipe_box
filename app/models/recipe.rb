@@ -4,6 +4,8 @@ class Recipe < ActiveRecord::Base
   validates :ingredients, presence: true
   validates :directions, presence: true
 
+  has_many :comments, inverse_of: :recipe, dependent: :destroy
+
   before_save :calculate_time
 
   def self.maximum_time(minutes)

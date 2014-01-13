@@ -27,4 +27,9 @@ FactoryGirl.define do
     end
   end
 
+  factory :comment do
+    body 'this was terrific'
+    recipe
+  end
+
 end
