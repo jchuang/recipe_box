@@ -16,10 +16,13 @@ feature 'comment on recipe', %q{
     recipe = FactoryGirl.create(:recipe)
     visit recipe_path(recipe)
 
-    fill_in 'Comment', with: 'this was great!'
+    fill_in 'Title', with: 'comment title'
+    fill_in 'Comment Text', with: 'this was great!'
     click_on 'Add Comment'
-    expect(page).to have_content 'Comment was successfully added.'
+
+    expect(page).to have_content 'Your comment was successfully added.'
     expect(page).to have_content recipe.name
+    expect(page).to have_content 'comment title'
     expect(page).to have_content 'this was great!'
   end
 
@@ -28,8 +31,8 @@ feature 'comment on recipe', %q{
     visit recipe_path(recipe)
 
     click_on 'Add Comment'
-    expect(page).to have_content "can't be blank"
-    expect(page).to_not have_content 'Comment was successfully added.'
+    expect(page).to have_content 'There was an issue with your comment. Please try again.'
+    expect(page).to_not have_content 'Your comment was successfully added.'
   end
 
   scenario 'delete comment from recipe' do

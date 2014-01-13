@@ -1,6 +1,4 @@
-<h1>Recipe Details</h1>
-
-<p>Name: <%= @recipe.name %></p>
+<h1><%= @recipe.name %></h1>
 
 <% unless @recipe.notes.blank? %>
   <p>Notes: <%= @recipe.notes %></p>
@@ -14,12 +12,42 @@
   <p>Servings: <%= @recipe.servings %></p>
 <% end %>
 
-<p>Ingredients: <%= simple_format @recipe.ingredients %></p>
-<p>Directions: <%= simple_format @recipe.directions %></p>
+<h2>Ingredients</h2>
+<p><%= simple_format @recipe.ingredients %></p>
 
-<p>
-  <%= link_to 'Edit Recipe', edit_recipe_path(@recipe) %> |
-  <%= link_to 'Delete Recipe', recipe_path(@recipe), method: :delete,
-        data: { confirm: 'Are you sure you want to delete this recipe?' } %> |
-  <%= link_to 'Back to Recipes', recipes_path %>
-</p>
+<h2>Directions</h2>
+<p><%= simple_format @recipe.directions %></p>
+
+<h2>Comments</h2>
+<% @comments.each do |comment| %>
+
+  <% unless comment.title.blank? %>
+    <p>Title: <%= comment.title %></p>
+  <% end %>
+  <p><%= comment.body %></p>
+<% end %>
+
+<h3>New Comment</h3>
+
+<%= form_for [@recipe, @comment] do |f| %>
+  <div class="input">
+    <%= f.label :title, 'Title (optional)' %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="input">
+    <%= f.label :body, 'Comment Text' %>
+    <%= f.text_area :body, cols: 30, rows: 5 %>
+  </div>
+  <div class="submit">
+    <%= f.submit 'Add Comment' %>
+  </div>
+<% end %>
+
+<div class="navigation">
+  <p>
+    <%= link_to 'Edit Recipe', edit_recipe_path(@recipe) %> |
+    <%= link_to 'Delete Recipe', recipe_path(@recipe), method: :delete,
+          data: { confirm: 'Are you sure you want to delete this recipe?' } %> |
+    <%= link_to 'Back to Recipes', recipes_path %>
+  </p>
+</div>
