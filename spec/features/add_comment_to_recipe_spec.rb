@@ -54,6 +54,7 @@ feature 'comment on recipe', %q{
     visit recipe_path(recipe)
 
     click_on 'Delete Comment'
+    expect(page).to have_content 'Your comment was successfully deleted.'
     expect(page).to_not have_content 'a special comment'
   end
 end
