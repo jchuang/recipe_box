@@ -24,7 +24,7 @@
   <% unless comment.title.blank? %>
     <p>Title: <%= comment.title %></p>
   <% end %>
-  <p><%= comment.body %></p>
+  <p><%= simple_format comment.body %></p>
   <p>
     <%= link_to 'Edit Comment', edit_comment_path(comment) %> |
     <%= link_to 'Delete Comment', comment_path(comment), method: :delete %>

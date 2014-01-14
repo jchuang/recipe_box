@@ -1,7 +1,7 @@
 RecipeBox::Application.routes.draw do
   root to: 'recipes#index'
   resources :recipes do
-    resources :comments, shallow: true
+    resources :comments, shallow: true, except: [:new, :show, :index]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
