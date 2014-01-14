@@ -15,8 +15,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @recipe = Recipe.find(params[:recipe_id])
     @comment = Comment.find(params[:id])
+    @recipe = @comment.recipe
     @comment.destroy
     redirect_to recipe_path(@recipe), notice: 'Your comment was successfully deleted.'
   end

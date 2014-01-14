@@ -25,7 +25,7 @@
     <p>Title: <%= comment.title %></p>
   <% end %>
   <p><%= comment.body %></p>
-  <p><%= link_to 'Delete Comment', recipe_comment_path(@recipe, comment), method: :delete %></p>
+  <p><%= link_to 'Delete Comment', comment_path(comment), method: :delete %></p>
 <% end %>
 
 <h3>New Comment</h3>
