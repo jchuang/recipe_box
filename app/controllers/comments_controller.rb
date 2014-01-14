@@ -14,6 +14,22 @@ class CommentsController < ApplicationController
     end
   end
 
+  def edit
+    @comment = Comment.find(params[:id])
+    @recipe = @comment.recipe
+  end
+
+  def update
+    @comment = Comment.find(params[:id])
+    @recipe = @comment.recipe
+
+    if @comment.update(comment_params)
+      redirect_to recipe_path(@recipe), notice: 'Your comment was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
   def destroy
     @comment = Comment.find(params[:id])
     @recipe = @comment.recipe

@@ -1,0 +1,17 @@
+<h3>Edit Comment</h3>
+
+<%= form_for @comment do |f| %>
+  <div class="input">
+    <%= f.label :title, 'Title (optional)' %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="input">
+    <%= f.label :body, 'Comment Text' %>
+    <%= f.text_area :body, cols: 30, rows: 5 %>
+  </div>
+  <div class="submit">
+    <%= f.submit 'Update Comment' %>
+  </div>
+<% end %>
+
+<p><%= link_to 'Back to Recipe', recipe_path(@recipe) %></p>

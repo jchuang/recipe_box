@@ -57,4 +57,17 @@ feature 'comment on recipe', %q{
     expect(page).to have_content 'Your comment was successfully deleted.'
     expect(page).to_not have_content 'a special comment'
   end
+
+  scenario 'edit comment on recipe' do
+    recipe = FactoryGirl.create(:recipe)
+    comment = FactoryGirl.create(:comment, recipe: recipe, body: 'a special comment')
+    visit recipe_path(recipe)
+
+    click_on 'Edit Comment'
+    fill_in 'Comment Text', with: 'just another comment'
+    click_on 'Update Comment'
+
+    expect(page).to have_content 'just another comment'
+    expect(page).to_not have_content 'a special comment'
+  end
 end
