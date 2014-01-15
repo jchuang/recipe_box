@@ -22,7 +22,7 @@ feature 'user adds tags to recipes', %q{
   scenario 'invalid tag with no name' do
     visit tags_path
     click_on 'Add Tag'
-    expect(page).to have_content 'The name must be provided. Please try again.'
+    expect(page).to have_content 'There was an issue with your tag. Please try again.'
     expect(page).to_not have_content 'Your tag was successfully added.'
   end
 

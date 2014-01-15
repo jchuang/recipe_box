@@ -11,7 +11,7 @@ class TagsController < ApplicationController
     if @tag.save
       redirect_to tags_path, notice: 'Your tag was successfully added.'
     else
-      redirect_to tags_path, notice: 'The name must be provided. Please try again.'
+      redirect_to tags_path, notice: 'There was an issue with your tag. Please try again.'
     end
   end
 
@@ -25,7 +25,7 @@ class TagsController < ApplicationController
     if @tag.update(tag_params)
       redirect_to tags_path, notice: 'Your tag was successfully updated.'
     else
-      render :edit, notice: 'The name must be provided. Please try again.'
+      render :edit, notice: 'There was an issue with your tag. Please try again.'
     end
   end
 
