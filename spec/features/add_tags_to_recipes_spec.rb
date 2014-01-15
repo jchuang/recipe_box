@@ -48,7 +48,18 @@ feature 'user adds tags to recipes', %q{
     expect(page).to_not have_content tag1.name
   end
 
-  scenario 'add tags to a recipe'
+  scenario 'add tags to a recipe' do
+    recipe = FactoryGirl.create(:recipe)
+    tag1 = FactoryGirl.create(:tag, name: 'vegetarian')
+    tag2 = FactoryGirl.create(:tag, name: 'Thanksgiving')
+    visit edit_recipe_path(recipe)
+
+    check 'vegetarian'
+    click_on 'Update Recipe'
+    expect(page).to have_content 'vegetarian'
+    expect(page).to_not have_content 'Thanksgiving'
+  end
+
   scenario 'remove tags from a recipe'
   scenario 'find all recipes that include a given tag'
 
