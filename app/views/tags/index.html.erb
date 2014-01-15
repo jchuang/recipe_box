@@ -1,7 +1,7 @@
 <h1>Tags</h1>
 
 <% @tags.each do |tag| %>
-  <p><%= tag.name %></p>
+  <p><%= link_to tag.name, tag_path(tag) %></p>
   <p>
     <%= link_to 'Edit Tag', edit_tag_path(tag) %> |
     <%= link_to 'Delete Tag', tag_path(tag), method: :delete %>
@@ -20,4 +20,4 @@
   </div>
 <% end %>
 
-<p><%= link_to 'Back to Recipes', recipes_path %></p>
+<p><%= link_to 'Show All Recipes', recipes_path %></p>

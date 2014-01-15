@@ -5,6 +5,10 @@ class TagsController < ApplicationController
     @tag = Tag.new
   end
 
+  def show
+    @tag = Tag.find(params[:id])
+  end
+
   def create
     @tag = Tag.new(tag_params)
 

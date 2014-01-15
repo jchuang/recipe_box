@@ -75,6 +75,15 @@ feature 'user adds tags to recipes', %q{
     expect(page).to_not have_content 'Thanksgiving'
   end
 
-  scenario 'find all recipes that include a given tag'
+  scenario 'find all recipes that include a given tag' do
+    recipe1 = FactoryGirl.create(:recipe)
+    recipe2 = FactoryGirl.create(:recipe)
+    tag = FactoryGirl.create(:tag)
 
+    tag.recipe_ids = [recipe1.id, recipe2.id]
+
+    visit tag_path(tag)
+    expect(page).to have_content recipe1.name
+    expect(page).to have_content recipe2.name
+  end
 end

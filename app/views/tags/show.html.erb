@@ -1,0 +1,15 @@
+<h1>Tag: <%= @tag.name %></h1>
+
+<% if @tag.recipes.count == 0 %>
+
+  <p>No recipes were found for this tag.</p>
+
+<% else %>
+
+  <% @tag.recipes.each do |recipe| %>
+    <p><%= link_to recipe.name, recipe_path(recipe) %></p>
+  <% end %>
+
+<% end %>
+
+<p><%= link_to 'Show All Recipes', recipes_path %></p>

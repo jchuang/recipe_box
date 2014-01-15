@@ -39,10 +39,12 @@
     <%= f.label :servings %>
     <%= f.text_field :servings %>
   </div>
-  <div class="input">
-    <%= f.label :tag_ids, 'Tags' %>
-    <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
-  </div>
+  <% unless Tag.count == 0 %>
+    <div class="input">
+      <%= f.label :tag_ids, 'Tags' %>
+      <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
+    </div>
+  <% end %>
   <div class="submit">
     <%= f.submit %>
   </div>
