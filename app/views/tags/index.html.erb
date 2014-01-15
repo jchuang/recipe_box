@@ -1,0 +1,21 @@
+<h1>Tags</h1>
+
+<% @tags.each do |tag| %>
+  <p><%= tag.name %></p>
+  <p>
+    <%= link_to 'Edit Tag', edit_tag_path(tag) %> |
+    <%= link_to 'Delete Tag', tag_path(tag), method: :delete %>
+  </p>
+<% end %>
+
+<h3>New Tag</h3>
+
+<%= form_for @tag do |f| %>
+  <div class="input">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="submit">
+    <%= f.submit 'Add Tag' %>
+  </div>
+<% end %>

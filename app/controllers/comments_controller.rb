@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
     if @comment.update(comment_params)
       redirect_to recipe_path(@recipe), notice: 'Your comment was successfully updated.'
     else
-      render :edit
+      render :edit, notice: 'There was an issue with your comment. Please try again.'
     end
   end
 

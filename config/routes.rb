@@ -3,7 +3,7 @@ RecipeBox::Application.routes.draw do
   resources :recipes do
     resources :comments, shallow: true, except: [:new, :show, :index]
   end
-  resources :tags
+  resources :tags, except: [:new]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

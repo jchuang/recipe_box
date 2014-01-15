@@ -1,0 +1,13 @@
+<h3>Edit Tag</h3>
+
+<%= form_for @tag do |f| %>
+  <div class="input">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="submit">
+    <%= f.submit 'Update Tag' %>
+  </div>
+<% end %>
+
+<p><%= link_to 'Back to Tags', tags_path %></p>

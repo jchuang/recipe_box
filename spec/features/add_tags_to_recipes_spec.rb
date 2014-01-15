@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'users can add tags to their recipes', %q{
+feature 'user adds tags to recipes', %q{
   As a registered user
   I can add tags to my recipes
   So that I can find them easily
@@ -43,7 +43,7 @@ feature 'users can add tags to their recipes', %q{
     tag2 = FactoryGirl.create(:tag)
     visit tags_path
 
-    click_on 'Delete Tag'
+    click_on 'Delete Tag', match: :first
     expect(page).to have_content tag2.name
     expect(page).to_not have_content tag1.name
   end
