@@ -19,7 +19,7 @@
 <p><%= simple_format @recipe.directions %></p>
 
 <h2>Tags</h2>
-<p><%= @recipe.tags.map { |tag| tag.name } %></p>
+<p><%= @recipe.tags.map { |tag| tag.name }.join(', ') %></p>
 
 <h2>Comments</h2>
 <% @comments.each do |comment| %>

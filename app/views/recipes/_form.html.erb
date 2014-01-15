@@ -40,6 +40,7 @@
     <%= f.text_field :servings %>
   </div>
   <div class="input">
+    <%= f.label :tag_ids, 'Tags' %>
     <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
   </div>
   <div class="submit">
