@@ -7,6 +7,8 @@ describe Recipe do
   it { should validate_presence_of :directions }
 
   it { should have_many(:comments).dependent(:destroy) }
+  it { should have_many(:recipe_tags).dependent(:destroy) }
+  it { should have_many(:tags).through(:recipe_tags) }
 
   describe '#calculate_time' do
 
