@@ -36,4 +36,9 @@ FactoryGirl.define do
     sequence(:name) { |n| "tag #{n}" }
   end
 
+  factory :recipe_tag do
+    recipe
+    tag
+  end
+
 end

@@ -60,7 +60,21 @@ feature 'user adds tags to recipes', %q{
     expect(page).to_not have_content 'Thanksgiving'
   end
 
-  scenario 'remove tags from a recipe'
+  scenario 'remove tags from a recipe' do
+    recipe = FactoryGirl.create(:recipe)
+    tag1 = FactoryGirl.create(:tag, name: 'vegetarian')
+    tag2 = FactoryGirl.create(:tag, name: 'Thanksgiving')
+    recipe.tag_ids = [tag1.id, tag2.id]
+
+    visit edit_recipe_path(recipe)
+    uncheck 'vegetarian'
+    uncheck 'Thanksgiving'
+    click_on 'Update Recipe'
+
+    expect(page).to_not have_content 'vegetarian'
+    expect(page).to_not have_content 'Thanksgiving'
+  end
+
   scenario 'find all recipes that include a given tag'
 
 end
