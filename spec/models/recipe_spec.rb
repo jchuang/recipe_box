@@ -5,10 +5,17 @@ describe Recipe do
   it { should validate_presence_of :name }
   it { should validate_presence_of :ingredients }
   it { should validate_presence_of :directions }
+  it { should validate_presence_of :user }
+
+  it 'should validate uniqueness of recipe name for a given user' do
+    FactoryGirl.create(:recipe)
+    should validate_uniqueness_of(:name).scoped_to(:user_id)
+  end
 
   it { should have_many(:comments).dependent(:destroy) }
   it { should have_many(:recipe_tags).dependent(:destroy) }
   it { should have_many(:tags).through(:recipe_tags) }
+  it { should belong_to :user }
 
   describe '#calculate_time' do
 

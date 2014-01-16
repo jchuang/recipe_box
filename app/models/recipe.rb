@@ -1,12 +1,14 @@
 class Recipe < ActiveRecord::Base
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: { scope: :user_id }
   validates :ingredients, presence: true
   validates :directions, presence: true
+  validates :user, presence: true
 
   has_many :comments, inverse_of: :recipe, dependent: :destroy
   has_many :recipe_tags, inverse_of: :recipe, dependent: :destroy
   has_many :tags, through: :recipe_tags
+  belongs_to :user, inverse_of: :recipes
 
   before_save :calculate_time
 
