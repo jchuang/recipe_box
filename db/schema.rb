@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115164839) do
+ActiveRecord::Schema.define(version: 20140116203449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20140115164839) do
     t.integer  "recipe_id",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id",    null: false
   end
 
   add_index "comments", ["recipe_id"], name: "index_comments_on_recipe_id", using: :btree
@@ -47,16 +48,33 @@ ActiveRecord::Schema.define(version: 20140115164839) do
     t.datetime "updated_at"
     t.string   "time_number"
     t.string   "time_unit"
+    t.integer  "user_id",                            null: false
   end
 
-  add_index "recipes", ["name"], name: "index_recipes_on_name", unique: true, using: :btree
+  add_index "recipes", ["name", "user_id"], name: "index_recipes_on_name_and_user_id", unique: true, using: :btree
+  add_index "recipes", ["user_id"], name: "index_recipes_on_user_id", using: :btree
 
   create_table "tags", force: true do |t|
     t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id",    null: false
   end
 
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
+  add_index "tags", ["name", "user_id"], name: "index_tags_on_name_and_user_id", unique: true, using: :btree
+  add_index "tags", ["user_id"], name: "index_tags_on_user_id", using: :btree
+
+  create_table "users", force: true do |t|
+    t.string   "first_name",     null: false
+    t.string   "last_name",      null: false
+    t.string   "username",       null: false
+    t.string   "photo_path"
+    t.text     "profile_notes"
+    t.datetime "last_signed_in"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end
