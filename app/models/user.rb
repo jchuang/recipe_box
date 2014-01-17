@@ -7,5 +7,6 @@ class User < ActiveRecord::Base
   has_many :recipes, inverse_of: :user, dependent: :destroy
   has_many :comments, inverse_of: :user, dependent: :destroy
   has_many :tags, inverse_of: :user, dependent: :destroy
+  has_many :identities, inverse_of: :user, dependent: :destroy
 
 end

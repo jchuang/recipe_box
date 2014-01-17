@@ -14,5 +14,6 @@ describe User do
   it { should have_many(:recipes).dependent(:destroy) }
   it { should have_many(:comments).dependent(:destroy) }
   it { should have_many(:tags).dependent(:destroy) }
+  it { should have_many(:identities).dependent(:destroy) }
 
 end

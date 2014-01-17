@@ -1,3 +1,3 @@
-use OmniAuth::Builder do
+Rails.application.config.middleware.use OmniAuth::Builder do
   provider :identity
 end
