@@ -1,5 +1,7 @@
 RecipeBox::Application.routes.draw do
   root to: 'recipes#index'
+  match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
+
   resources :recipes do
     resources :comments, shallow: true, except: [:new, :show, :index]
   end
