@@ -45,8 +45,8 @@ FactoryGirl.define do
   end
 
   factory :user do
-    first_name 'first name'
-    last_name 'last name'
+    sequence(:uid) { |n| "uid #{n}" }
+    provider 'identity'
     sequence(:username) { |n| "username #{n}" }
   end
 

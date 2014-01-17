@@ -28,14 +28,12 @@ ActiveRecord::Schema.define(version: 20140117155048) do
   add_index "comments", ["recipe_id"], name: "index_comments_on_recipe_id", using: :btree
 
   create_table "identities", force: true do |t|
-    t.string   "uid",        null: false
-    t.string   "provider",   null: false
-    t.integer  "user_id",    null: false
+    t.string   "name",            null: false
+    t.string   "email",           null: false
+    t.integer  "password_digest", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
   create_table "recipe_tags", force: true do |t|
     t.integer  "recipe_id",  null: false
@@ -75,8 +73,8 @@ ActiveRecord::Schema.define(version: 20140117155048) do
   add_index "tags", ["user_id"], name: "index_tags_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "first_name",     null: false
-    t.string   "last_name",      null: false
+    t.string   "uid",            null: false
+    t.string   "provider",       null: false
     t.string   "username",       null: false
     t.string   "photo_path"
     t.text     "profile_notes"
