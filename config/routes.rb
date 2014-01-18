@@ -1,4 +1,5 @@
 RecipeBox::Application.routes.draw do
+  devise_for :users
   root to: 'recipes#index'
   resources :recipes do
     resources :comments, shallow: true, except: [:new, :show, :index]

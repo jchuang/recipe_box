@@ -41,4 +41,12 @@ FactoryGirl.define do
     tag
   end
 
+  factory :user do
+    first_name 'Hello'
+    last_name 'World'
+    sequence(:username) { |n| "helloworld#{n}" }
+    sequence(:email) { |n| "hello#{n}@world.com" }
+    password 'foobarbaz'
+    password_confirmation 'foobarbaz'
+  end
 end
