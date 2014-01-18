@@ -27,6 +27,24 @@ feature 'user signs up for an account', %q{
     expect(page).to have_content 'Sign Out'
   end
 
+  scenario 'required information is not provided' do
+    visit root_path
+    click_on 'Create New Account'
+    click_on 'Create Account'
 
+    expect(page).to have_content "can't be blank"
+    expect(page).to_not have_content 'Welcome to RecipeBox!'
+  end
+
+  scenario 'password confirmation does not match password' do
+    visit root_path
+    click_on 'Create New Account'
+    fill_in 'Password', with: 'password', match: :first
+    fill_in 'Password Confirmation', with: 'other'
+
+    click_on 'Create Account'
+    expect(page).to have_content "doesn't match"
+    expect(page).to_not have_content 'Welcome to RecipeBox!'
+  end
 
 end
