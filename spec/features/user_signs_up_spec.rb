@@ -17,8 +17,9 @@ feature 'user signs up for an account', %q{
 
     fill_in 'First Name', with: 'Hello'
     fill_in 'Last Name', with: 'World'
+    fill_in 'Username', with: 'helloworld'
     fill_in 'Email Address', with: 'abc@example.com'
-    fill_in 'Password', with: 'password'
+    fill_in 'Password', with: 'password', match: :first
     fill_in 'Password Confirmation', with: 'password'
 
     click_on 'Create Account'

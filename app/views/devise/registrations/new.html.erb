@@ -1,16 +1,20 @@
 <h2>Sign up</h2>
 
-<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :email, :required => true, :autofocus => true %>
-    <%= f.input :password, :required => true %>
-    <%= f.input :password_confirmation, :required => true %>
+    <%= f.input :first_name, label: 'First Name', required: true, autofocus: true %>
+    <%= f.input :last_name, label: 'Last Name', required: true %>
+    <%= f.input :username, required: true,
+      hint: 'Username must be between 3-15 characters long. Letters, numbers, and underscores are permitted.' %>
+    <%= f.input :email, label: 'Email Address', required: true %>
+    <%= f.input :password, required: true %>
+    <%= f.input :password_confirmation, label: 'Password Confirmation', required: true %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
+    <%= f.button :submit, 'Create Account' %>
   </div>
 <% end %>
 
