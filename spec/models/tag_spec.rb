@@ -4,9 +4,9 @@ describe Tag do
 
   it { should validate_presence_of :name }
 
-  it 'should validate uniqueness of name' do
+  it 'should validate uniqueness of name for a given user' do
     FactoryGirl.create(:tag)
-    should validate_uniqueness_of(:name)
+    should validate_uniqueness_of(:name).scoped_to(:user_id)
   end
 
   it { should have_many(:recipe_tags).dependent(:destroy) }

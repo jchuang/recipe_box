@@ -6,9 +6,9 @@ describe Recipe do
   it { should validate_presence_of :ingredients }
   it { should validate_presence_of :directions }
 
-  it 'should validate uniqueness of name' do
+  it 'should validate uniqueness of name for a given user' do
     FactoryGirl.create(:recipe)
-    should validate_uniqueness_of(:name)
+    should validate_uniqueness_of(:name).scoped_to(:user_id)
   end
 
   it { should have_many(:comments).dependent(:destroy) }
