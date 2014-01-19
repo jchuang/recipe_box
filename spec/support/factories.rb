@@ -7,6 +7,7 @@ FactoryGirl.define do
     ingredients 'here are the ingredients'
     directions 'here are the directions'
     visibility 'Public'
+    user
 
     trait :fast do
       sequence(:name) { |n| "fast recipe #{n}"}
@@ -30,10 +31,12 @@ FactoryGirl.define do
   factory :comment do
     sequence(:body) { |n| "comment text #{n}" }
     recipe
+    user
   end
 
   factory :tag do
     sequence(:name) { |n| "tag #{n}" }
+    user
   end
 
   factory :recipe_tag do

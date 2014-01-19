@@ -26,4 +26,8 @@ describe User do
     should validate_uniqueness_of(:username)
   end
 
+  it { should have_many(:recipes).dependent(:destroy) }
+  it { should have_many(:comments).dependent(:destroy) }
+  it { should have_many(:tags).dependent(:destroy) }
+
 end

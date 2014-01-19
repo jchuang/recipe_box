@@ -7,6 +7,7 @@ class Recipe < ActiveRecord::Base
   has_many :comments, inverse_of: :recipe, dependent: :destroy
   has_many :recipe_tags, inverse_of: :recipe, dependent: :destroy
   has_many :tags, through: :recipe_tags
+  belongs_to :user, inverse_of: :recipes
 
   before_save :calculate_time
 

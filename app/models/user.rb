@@ -9,4 +9,8 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true,
     format: { with: /\A[a-zA-Z0-9_]{3,15}\z/ }
 
+  has_many :recipes, inverse_of: :user, dependent: :destroy
+  has_many :comments, inverse_of: :user, dependent: :destroy
+  has_many :tags, inverse_of: :user, dependent: :destroy
+
 end
