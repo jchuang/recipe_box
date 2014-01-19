@@ -11,8 +11,9 @@ feature 'user deletes recipe', %q{
 # * when user is viewing someone else's recipe, there is no delete option
 
   scenario 'when recipe belongs to user' do
-    recipe = FactoryGirl.create(:recipe)
-    visit recipe_path(recipe)
+    sign_in
+    recipe = FactoryGirl.build(:recipe)
+    create_recipe(recipe)
     expect(page).to have_content 'tasty food'
 
     click_on 'Delete Recipe'

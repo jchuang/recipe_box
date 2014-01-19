@@ -11,10 +11,13 @@ feature 'user edits recipe', %q{
 # * user can edit contents of any field, including adding content to optional fields
 # * if all required fields have been entered, user can choose to save the updated recipe
 
-  scenario 'desired edits include all required fields' do
-    recipe = FactoryGirl.create(:recipe)
+  before(:each) do
+    sign_in
+    recipe = FactoryGirl.build(:recipe)
+    create_recipe(recipe)
+  end
 
-    visit recipe_path(recipe)
+  scenario 'desired edits include all required fields' do
     click_on 'Edit Recipe'
 
     fill_in 'Name', with: 'delicious foods'
@@ -30,9 +33,6 @@ feature 'user edits recipe', %q{
   end
 
   scenario 'a required field is empty' do
-    recipe = FactoryGirl.create(:recipe)
-
-    visit recipe_path(recipe)
     click_on 'Edit Recipe'
 
     fill_in 'Name', with: ''
