@@ -14,7 +14,8 @@ feature 'user adds recipe', %q{
 # * otherwise user is prompted to enter remaining required fields
 
   scenario 'create a valid recipe' do
-    visit 'recipes/new'
+    sign_in
+    visit new_recipe_path
 
     fill_in 'Name', with: 'Green Eggs and Ham'
     fill_in 'Ingredients', with: %q{
@@ -37,20 +38,28 @@ feature 'user adds recipe', %q{
   end
 
   scenario 'create a duplicate recipe' do
-    recipe = FactoryGirl.create(:recipe)
-    visit 'recipes/new'
+    sign_in
+    recipe = FactoryGirl.build(:recipe)
 
+    visit new_recipe_path
     fill_in 'Name', with: recipe.name
-    fill_in 'Ingredients', with: 'some ingredients'
-    fill_in 'Directions', with: 'some directions'
-
+    fill_in 'Ingredients', with: recipe.ingredients
+    fill_in 'Directions', with: recipe.directions
     click_on 'Create Recipe'
+
+    visit new_recipe_path
+    fill_in 'Name', with: recipe.name
+    fill_in 'Ingredients', with: recipe.ingredients
+    fill_in 'Directions', with: recipe.directions
+    click_on 'Create Recipe'
+
     expect(page).to have_content 'Name has already been taken'
     expect(page).to_not have_content 'Recipe was successfully added.'
   end
 
   scenario 'required information is not provided' do
-    visit 'recipes/new'
+    sign_in
+    visit new_recipe_path
     click_on 'Create Recipe'
 
     expect(page).to_not have_content 'Recipe was successfully added.'
@@ -59,10 +68,10 @@ feature 'user adds recipe', %q{
     expect(page).to have_content "Directions can't be blank"
   end
 
-  scenario 'Save a recipe without some optional fields' do
+  scenario 'save a recipe without some optional fields' do
     recipe = FactoryGirl.build(:recipe)
-
-    visit 'recipes/new'
+    sign_in
+    visit new_recipe_path
 
     fill_in 'Name', with: recipe.name
     fill_in 'Ingredients', with: recipe.ingredients
