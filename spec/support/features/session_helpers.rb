@@ -13,7 +13,6 @@ module Features
 
     def create_recipe(recipe)
       visit new_recipe_path
-
       fill_in 'Name', with: recipe.name
       fill_in 'Ingredients', with: recipe.ingredients
       fill_in 'Directions', with: recipe.directions
@@ -24,6 +23,12 @@ module Features
       visit recipe_path(recipe)
       fill_in 'Comment Text', with: comment.body
       click_on 'Add Comment'
+    end
+
+    def add_tag(tag)
+      visit tags_path
+      fill_in 'Name', with: tag.name
+      click_on 'Add Tag'
     end
 
   end
