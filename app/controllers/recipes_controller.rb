@@ -11,7 +11,7 @@ class RecipesController < ApplicationController
   end
 
   def index
-    @recipes = filter_recipes(params)
+    @recipes = Recipe.filter_recipes(params)
   end
 
   def create
@@ -46,17 +46,6 @@ class RecipesController < ApplicationController
   end
 
   private
-
-  def filter_recipes(params)
-    recipes = Recipe.all
-    if params[:minutes].present?
-      recipes = recipes.maximum_time(params[:minutes].to_i)
-    end
-    if params[:keywords].present?
-      recipes = recipes.search_text(params[:keywords])
-    end
-    recipes
-  end
 
   def recipe_params
     params.require(:recipe).permit(:name, :time_number, :time_unit, :servings,

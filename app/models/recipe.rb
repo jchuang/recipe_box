@@ -19,6 +19,17 @@ class Recipe < ActiveRecord::Base
     Recipe.where("to_tsvector(name || ' ' || ingredients || ' ' || directions) @@ plainto_tsquery(?)", keywords)
   end
 
+  def self.filter_recipes(params)
+    recipes = Recipe.all
+    if params[:minutes].present?
+      recipes = recipes.maximum_time(params[:minutes].to_i)
+    end
+    if params[:keywords].present?
+      recipes = recipes.search_text(params[:keywords])
+    end
+    recipes
+  end
+
   private
 
   def calculate_time
