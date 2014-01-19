@@ -14,6 +14,7 @@ feature 'comment on recipe', %q{
 
   scenario 'add valid comment to recipe' do
     recipe = FactoryGirl.create(:recipe)
+    sign_in
     visit recipe_path(recipe)
 
     fill_in 'Title', with: 'comment title'
@@ -28,19 +29,23 @@ feature 'comment on recipe', %q{
 
   scenario 'add multiple comments to recipe' do
     recipe = FactoryGirl.create(:recipe)
-    comment1 = FactoryGirl.create(:comment, title: 'this one has a title', recipe: recipe)
-    comment2 = FactoryGirl.create(:comment, recipe: recipe)
-    comment3 = FactoryGirl.create(:comment, recipe: recipe)
-
+    sign_in
     visit recipe_path(recipe)
+
+    comments = FactoryGirl.build_list(:comment, 3)
+    comments.each do |comment|
+      add_comment(comment, recipe)
+    end
+
     expect(page).to have_content recipe.name
-    expect(page).to have_content comment1.body
-    expect(page).to have_content comment2.body
-    expect(page).to have_content comment3.body
+    comments.each do |comment|
+      expect(page).to have_content comment.body
+    end
   end
 
   scenario 'invalid comment with no text' do
     recipe = FactoryGirl.create(:recipe)
+    sign_in
     visit recipe_path(recipe)
 
     click_on 'Add Comment'
@@ -50,8 +55,11 @@ feature 'comment on recipe', %q{
 
   scenario 'delete comment from recipe' do
     recipe = FactoryGirl.create(:recipe)
-    comment = FactoryGirl.create(:comment, recipe: recipe, body: 'a special comment')
+    sign_in
     visit recipe_path(recipe)
+
+    comment = FactoryGirl.build(:comment, recipe: recipe, body: 'a special comment')
+    add_comment(comment, recipe)
 
     click_on 'Delete Comment'
     expect(page).to have_content 'Your comment was successfully deleted.'
@@ -60,8 +68,11 @@ feature 'comment on recipe', %q{
 
   scenario 'edit comment on recipe' do
     recipe = FactoryGirl.create(:recipe)
-    comment = FactoryGirl.create(:comment, recipe: recipe, body: 'a special comment')
+    sign_in
     visit recipe_path(recipe)
+
+    comment = FactoryGirl.build(:comment, recipe: recipe, body: 'a special comment')
+    add_comment(comment, recipe)
 
     click_on 'Edit Comment'
     fill_in 'Comment Text', with: 'just another comment'

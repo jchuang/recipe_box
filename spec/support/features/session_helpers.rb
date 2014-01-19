@@ -1,11 +1,5 @@
 module Features
   module SessionHelpers
-    def sign_up_with(email, password)
-      visit sign_up_path
-      fill_in 'Email', with: email
-      fill_in 'Password', with: password
-      click_button 'Sign up'
-    end
 
     def sign_in
       user = FactoryGirl.create(:user)
@@ -25,5 +19,12 @@ module Features
       fill_in 'Directions', with: recipe.directions
       click_on 'Create Recipe'
     end
+
+    def add_comment(comment, recipe)
+      visit recipe_path(recipe)
+      fill_in 'Comment Text', with: comment.body
+      click_on 'Add Comment'
+    end
+
   end
 end
