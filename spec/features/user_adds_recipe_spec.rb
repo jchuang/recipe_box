@@ -40,14 +40,9 @@ feature 'user adds recipe', %q{
   scenario 'create a duplicate recipe' do
     sign_in
     recipe = FactoryGirl.build(:recipe)
-
+    create_recipe(recipe)
     visit new_recipe_path
-    fill_in 'Name', with: recipe.name
-    fill_in 'Ingredients', with: recipe.ingredients
-    fill_in 'Directions', with: recipe.directions
-    click_on 'Create Recipe'
 
-    visit new_recipe_path
     fill_in 'Name', with: recipe.name
     fill_in 'Ingredients', with: recipe.ingredients
     fill_in 'Directions', with: recipe.directions
@@ -68,9 +63,9 @@ feature 'user adds recipe', %q{
     expect(page).to have_content "Directions can't be blank"
   end
 
-  scenario 'save a recipe without some optional fields' do
-    recipe = FactoryGirl.build(:recipe)
+  scenario 'add a recipe without some optional fields' do
     sign_in
+    recipe = FactoryGirl.build(:recipe)
     visit new_recipe_path
 
     fill_in 'Name', with: recipe.name
