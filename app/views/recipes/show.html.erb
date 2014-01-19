@@ -51,11 +51,11 @@
   </div>
 <% end %>
 
-<div class="navigation">
-  <p>
-    <%= link_to 'Edit Recipe', edit_recipe_path(@recipe) %> |
-    <%= link_to 'Delete Recipe', recipe_path(@recipe), method: :delete,
-          data: { confirm: 'Are you sure you want to delete this recipe?' } %> |
-    <%= link_to 'Back to Recipes', recipes_path %>
-  </p>
-</div>
+<nav>
+  <ul>
+    <li><%= link_to 'Edit Recipe', edit_recipe_path(@recipe) %></li>
+    <li><%= link_to 'Delete Recipe', recipe_path(@recipe), method: :delete,
+          data: { confirm: 'Are you sure you want to delete this recipe?' } %></li>
+    <li><%= link_to 'Back to Recipes', recipes_path %></li>
+  </ul>
+</nav>
