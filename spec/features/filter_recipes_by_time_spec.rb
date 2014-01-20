@@ -12,9 +12,11 @@ feature 'find recipes by time required', %q{
   # * if no recipes are displayed, user is given some way to continue exploring recipes
 
   scenario 'displays time in the desired units' do
-    recipe = FactoryGirl.create(:recipe)
+    sign_in
+    recipe = FactoryGirl.build(:recipe)
+    create_recipe(recipe)
 
-    visit edit_recipe_path(recipe)
+    click_on 'Edit Recipe'
     fill_in 'Time', with: '90'
     select 'minutes', from: 'Unit'
     click_on 'Update Recipe'
