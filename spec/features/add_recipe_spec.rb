@@ -80,4 +80,10 @@ feature 'user adds recipe', %q{
     expect(page).to_not have_content 'Notes'
   end
 
+  scenario 'when user is not authenticated' do
+    visit recipes_path
+    expect(page).to_not have_content 'Add New Recipe'
+    expect { visit new_recipe_path }.to raise_error(ActionController::RoutingError,
+      'The page you requested was not found.')
+  end
 end
