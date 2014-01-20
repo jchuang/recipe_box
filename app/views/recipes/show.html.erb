@@ -30,25 +30,29 @@
   <% end %>
   <p><%= simple_format comment.body %></p>
   <p>
-    <%= link_to 'Edit Comment', edit_comment_path(comment) %> |
-    <%= link_to 'Delete Comment', comment_path(comment), method: :delete %>
+    <% if comment.user == current_user %>
+      <%= link_to 'Edit Comment', edit_comment_path(comment) %> |
+      <%= link_to 'Delete Comment', comment_path(comment), method: :delete %>
+    <% end %>
   </p>
 <% end %>
 
-<h3>New Comment</h3>
+<% if user_signed_in? %>
+  <h3>New Comment</h3>
 
-<%= form_for [@recipe, @comment] do |f| %>
-  <div class="input">
-    <%= f.label :title, 'Title (optional)' %>
-    <%= f.text_field :title %>
-  </div>
-  <div class="input">
-    <%= f.label :body, 'Comment Text' %>
-    <%= f.text_area :body, cols: 30, rows: 5 %>
-  </div>
-  <div class="submit">
-    <%= f.submit 'Add Comment' %>
-  </div>
+  <%= form_for [@recipe, @comment] do |f| %>
+    <div class="input">
+      <%= f.label :title, 'Title (optional)' %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="input">
+      <%= f.label :body, 'Comment Text' %>
+      <%= f.text_area :body, cols: 30, rows: 5 %>
+    </div>
+    <div class="submit">
+      <%= f.submit 'Add Comment' %>
+    </div>
+  <% end %>
 <% end %>
 
 <nav>

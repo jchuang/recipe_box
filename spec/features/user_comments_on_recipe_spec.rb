@@ -81,4 +81,37 @@ feature 'comment on recipe', %q{
     expect(page).to have_content 'just another comment'
     expect(page).to_not have_content 'a special comment'
   end
+
+  scenario 'when comment belongs to another user' do
+    recipe = FactoryGirl.create(:recipe)
+    comment = FactoryGirl.create(:comment, recipe: recipe)
+    sign_in
+
+    visit recipe_path(recipe)
+    expect(page).to_not have_content 'Edit Comment'
+    expect(page).to_not have_content 'Delete Comment'
+    expect { visit edit_comment_path(comment) }.to raise_error(ActionController::RoutingError,
+      'The page you requested was not found.')
+  end
+
+  context 'when user is not authenticated' do
+    scenario 'the user cannot edit or delete comments' do
+      recipe = FactoryGirl.create(:recipe)
+      comment = FactoryGirl.create(:comment, recipe: recipe)
+
+      visit recipe_path(recipe)
+      expect(page).to_not have_content 'Edit Comment'
+      expect(page).to_not have_content 'Delete Comment'
+      expect { visit edit_comment_path(comment) }.to raise_error(ActionController::RoutingError,
+        'The page you requested was not found.')
+    end
+
+    scenario 'the user cannot add comments' do
+      recipe = FactoryGirl.create(:recipe)
+      visit recipe_path(recipe)
+
+      expect(page).to_not have_content 'New Comment'
+      expect(page).to_not have_content 'Comment Text'
+    end
+  end
 end

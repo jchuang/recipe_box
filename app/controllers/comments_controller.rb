@@ -17,11 +17,13 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = Comment.find(params[:id])
+    authorize_user(@comment)
     @recipe = @comment.recipe
   end
 
   def update
     @comment = Comment.find(params[:id])
+    authorize_user(@comment)
     @recipe = @comment.recipe
 
     if @comment.update(comment_params)
@@ -33,6 +35,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
+    authorize_user(@comment)
     @recipe = @comment.recipe
     @comment.destroy
     redirect_to recipe_path(@recipe), notice: 'Your comment was successfully deleted.'
@@ -42,6 +45,12 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:title, :body, :recipe)
+  end
+
+  def authorize_user(comment)
+    unless user_signed_in? and (comment.user == current_user)
+      raise ActionController::RoutingError.new('The page you requested was not found.')
+    end
   end
 
 end
