@@ -53,9 +53,11 @@
 
 <nav>
   <ul>
-    <li><%= link_to 'Edit Recipe', edit_recipe_path(@recipe) %></li>
-    <li><%= link_to 'Delete Recipe', recipe_path(@recipe), method: :delete,
+    <% if @recipe.user == current_user %>
+      <li><%= link_to 'Edit Recipe', edit_recipe_path(@recipe) %></li>
+      <li><%= link_to 'Delete Recipe', recipe_path(@recipe), method: :delete,
           data: { confirm: 'Are you sure you want to delete this recipe?' } %></li>
+    <% end %>
     <li><%= link_to 'Back to Recipes', recipes_path %></li>
   </ul>
 </nav>

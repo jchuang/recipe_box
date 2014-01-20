@@ -27,10 +27,12 @@ class RecipesController < ApplicationController
 
   def edit
     @recipe = Recipe.find(params[:id])
+    authorize_user(@recipe)
   end
 
   def update
     @recipe = Recipe.find(params[:id])
+    authorize_user(@recipe)
 
     if @recipe.update(recipe_params)
       redirect_to recipe_path(@recipe), notice: 'Recipe was successfully updated.'
@@ -41,6 +43,8 @@ class RecipesController < ApplicationController
 
   def destroy
     @recipe = Recipe.find(params[:id])
+    authorize_user(@recipe)
+
     @recipe.destroy
     redirect_to recipes_path, notice: 'Recipe was successfully deleted.'
   end
@@ -50,6 +54,12 @@ class RecipesController < ApplicationController
   def recipe_params
     params.require(:recipe).permit(:name, :time_number, :time_unit, :servings,
       :ingredients, :directions, :notes, :visibility, tag_ids: [])
+  end
+
+  def authorize_user(recipe)
+    unless user_signed_in? and (recipe.user == current_user)
+      raise ActionController::RoutingError.new('The page you requested was not found.')
+    end
   end
 
 end

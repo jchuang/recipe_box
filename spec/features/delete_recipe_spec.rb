@@ -21,5 +21,16 @@ feature 'user deletes recipe', %q{
     expect(page).to_not have_content 'tasty food'
   end
 
-  scenario 'when recipe belongs to another user'
+  scenario 'when recipe belongs to another user' do
+    recipe = FactoryGirl.create(:recipe)
+    sign_in
+    visit recipe_path(recipe)
+    expect(page).to_not have_content 'Delete Recipe'
+  end
+
+  scenario 'when user is not authenticated' do
+    recipe = FactoryGirl.create(:recipe)
+    visit recipe_path(recipe)
+    expect(page).to_not have_content 'Delete Recipe'
+  end
 end
