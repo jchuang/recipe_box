@@ -31,5 +31,14 @@ module Features
       click_on 'Add Tag'
     end
 
+    def sign_in_user(user)
+      visit root_path
+      click_on 'Sign In'
+
+      fill_in 'Email Address', with: user.email
+      fill_in 'Password', with: user.password
+      click_button 'Sign In'
+    end
+
   end
 end

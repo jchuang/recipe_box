@@ -2,20 +2,24 @@
 
 <% @tags.each do |tag| %>
   <p><%= link_to tag.name, tag_path(tag) %></p>
-  <p>
-    <%= link_to 'Edit Tag', edit_tag_path(tag) %> |
-    <%= link_to 'Delete Tag', tag_path(tag), method: :delete %>
-  </p>
+  <% if @user == current_user %>
+    <ul>
+      <li><%= link_to 'Edit Tag', edit_tag_path(tag) %></li>
+      <li><%= link_to 'Delete Tag', tag_path(tag), method: :delete %></li>
+    </ul>
+  <% end %>
 <% end %>
 
-<h3>New Tag</h3>
+<% if @user == current_user %>
+  <h3>New Tag</h3>
 
-<%= form_for [current_user, @tag] do |f| %>
-  <div class="input">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-  <div class="submit">
-    <%= f.submit 'Add Tag' %>
-  </div>
+  <%= form_for [current_user, @tag] do |f| %>
+    <div class="input">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="submit">
+      <%= f.submit 'Add Tag' %>
+    </div>
+  <% end %>
 <% end %>
