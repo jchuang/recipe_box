@@ -46,15 +46,11 @@ feature 'user adds tags to recipes', %q{
 
     scenario 'delete an existing tag' do
       sign_in
-      tag1 = FactoryGirl.build(:tag)
-      tag2 = FactoryGirl.build(:tag)
+      tag = FactoryGirl.build(:tag)
+      add_tag(tag)
 
-      add_tag(tag1)
-      add_tag(tag2)
-      click_on 'Delete Tag', match: :first
-
-      expect(page).to have_content tag2.name
-      expect(page).to_not have_content tag1.name
+      click_on 'Delete Tag'
+      expect(page).to_not have_content tag.name
     end
   end
 
@@ -85,7 +81,19 @@ feature 'user adds tags to recipes', %q{
     expect(page).to have_content 'New Tag'
   end
 
-  scenario 'when user is not authenticated'
+  scenario 'when user is not authenticated' do
+    user = FactoryGirl.create(:user)
+    sign_in_user(user)
+    tag = FactoryGirl.build(:tag)
+    add_tag(tag)
+    click_on 'Sign Out'
+
+    visit user_tags_path(user)
+    expect(page).to have_content tag.name
+    expect(page).to_not have_content 'Edit Tag'
+    expect(page).to_not have_content 'Delete Tag'
+    expect(page).to_not have_content 'New Tag'
+  end
 
   context 'editing a recipe' do
     before(:each) do
