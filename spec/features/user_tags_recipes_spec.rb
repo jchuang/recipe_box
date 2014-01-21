@@ -13,7 +13,7 @@ feature 'user adds tags to recipes', %q{
 
   scenario 'create a valid tag' do
     sign_in
-    visit tags_path
+    click_on 'My Tags'
     fill_in 'Name', with: 'vegetarian'
     click_on 'Add Tag'
 
@@ -23,7 +23,7 @@ feature 'user adds tags to recipes', %q{
 
   scenario 'invalid tag with no name' do
     sign_in
-    visit tags_path
+    click_on 'My Tags'
     click_on 'Add Tag'
 
     expect(page).to have_content 'There was an issue with your tag. Please try again.'

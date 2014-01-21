@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
 
   def create
+    check_authentication
     @recipe = Recipe.find(params[:recipe_id])
     @comment = Comment.new(comment_params)
     @comment.recipe = @recipe
@@ -53,4 +54,9 @@ class CommentsController < ApplicationController
     end
   end
 
+  def check_authentication
+    unless user_signed_in?
+      raise ActionController::RoutingError.new('The page you requested was not found.')
+    end
+  end
 end

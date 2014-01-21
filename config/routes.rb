@@ -1,10 +1,16 @@
 RecipeBox::Application.routes.draw do
   devise_for :users
   root to: 'recipes#index'
+
   resources :recipes do
     resources :comments, shallow: true, except: [:new, :show, :index]
   end
-  resources :tags, except: [:new]
+
+  resources :users, only: [:show] do
+    resources :tags, only: [:index, :create]
+  end
+
+  resources :tags, only: [:show, :edit, :update, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

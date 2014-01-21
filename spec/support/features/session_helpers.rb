@@ -26,7 +26,7 @@ module Features
     end
 
     def add_tag(tag)
-      visit tags_path
+      click_on 'My Tags'
       fill_in 'Name', with: tag.name
       click_on 'Add Tag'
     end

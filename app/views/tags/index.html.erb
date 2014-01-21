@@ -10,7 +10,7 @@
 
 <h3>New Tag</h3>
 
-<%= form_for @tag do |f| %>
+<%= form_for [current_user, @tag] do |f| %>
   <div class="input">
     <%= f.label :name %>
     <%= f.text_field :name %>
