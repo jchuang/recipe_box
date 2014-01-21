@@ -6,8 +6,9 @@ RecipeBox::Application.routes.draw do
     resources :comments, shallow: true, except: [:new, :show, :index]
   end
 
-  resources :users, only: [:show] do
+  resources :users, only: :show do
     resources :tags, only: [:index, :create]
+    resources :recipes, only: :index
   end
 
   resources :tags, only: [:show, :edit, :update, :destroy]

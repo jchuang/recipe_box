@@ -12,7 +12,11 @@ class RecipesController < ApplicationController
   end
 
   def index
-    @recipes = Recipe.filter_recipes(params)
+    if params[:user_id]
+      @recipes = Recipe.where(user_id: params[:user_id]).filter_recipes(params)
+    else
+      @recipes = Recipe.filter_recipes(params)
+    end
   end
 
   def create
