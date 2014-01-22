@@ -1,12 +1,17 @@
 <h1>Tags</h1>
 
-<% @tags.each do |tag| %>
-  <p><%= link_to tag.name, tag_path(tag) %></p>
-  <% if @user == current_user %>
+<% if @user == current_user %>
+  <% @tags.each do |tag| %>
+    <p><%= link_to tag.name, tag_path(tag) %></p>
     <ul>
       <li><%= link_to 'Edit Tag', edit_tag_path(tag) %></li>
       <li><%= link_to 'Delete Tag', tag_path(tag), method: :delete %></li>
     </ul>
+  <% end %>
+
+<% else %>
+  <% @tags.each do |tag| %>
+    <p><%= link_to tag.name, tag_path(tag) %></p>
   <% end %>
 <% end %>
 
