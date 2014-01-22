@@ -1,7 +1,8 @@
 class RecipesController < ApplicationController
 
+  skip_before_action :authenticate_user!, only: [:show, :index]
+
   def new
-    check_authentication
     @recipe = Recipe.new
   end
 
@@ -21,7 +22,6 @@ class RecipesController < ApplicationController
   end
 
   def create
-    check_authentication
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
 
@@ -65,12 +65,6 @@ class RecipesController < ApplicationController
 
   def authorize_user(recipe)
     unless user_signed_in? and (recipe.user == current_user)
-      raise ActionController::RoutingError.new('The page you requested was not found.')
-    end
-  end
-
-  def check_authentication
-    unless user_signed_in?
       raise ActionController::RoutingError.new('The page you requested was not found.')
     end
   end

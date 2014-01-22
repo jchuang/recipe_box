@@ -62,7 +62,5 @@ feature 'user edits recipe', %q{
     recipe = FactoryGirl.create(:recipe)
     visit recipe_path(recipe)
     expect(page).to_not have_content 'Edit Recipe'
-    expect { visit edit_recipe_path(recipe) }.to raise_error(ActionController::RoutingError,
-      'The page you requested was not found.')
   end
 end

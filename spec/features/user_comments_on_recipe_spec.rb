@@ -102,8 +102,6 @@ feature 'comment on recipe', %q{
       visit recipe_path(recipe)
       expect(page).to_not have_content 'Edit Comment'
       expect(page).to_not have_content 'Delete Comment'
-      expect { visit edit_comment_path(comment) }.to raise_error(ActionController::RoutingError,
-        'The page you requested was not found.')
     end
 
     scenario 'the user cannot add comments' do

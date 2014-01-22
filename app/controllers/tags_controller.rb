@@ -1,5 +1,7 @@
 class TagsController < ApplicationController
 
+  skip_before_action :authenticate_user!, only: [:index, :show]
+
   def index
     @tags = Tag.where(user_id: params[:user_id])
     @user = User.find(params[:user_id])
@@ -11,7 +13,6 @@ class TagsController < ApplicationController
   end
 
   def create
-    check_authentication
     @tag = Tag.new(tag_params)
     @tag.user = current_user
 
@@ -54,12 +55,6 @@ class TagsController < ApplicationController
 
   def authorize_user(tag)
     unless user_signed_in? and (tag.user == current_user)
-      raise ActionController::RoutingError.new('The page you requested was not found.')
-    end
-  end
-
-  def check_authentication
-    unless user_signed_in?
       raise ActionController::RoutingError.new('The page you requested was not found.')
     end
   end
