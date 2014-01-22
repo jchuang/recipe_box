@@ -13,6 +13,7 @@ class RecipesController < ApplicationController
 
   def index
     if params[:user_id]
+      @user = User.find(params[:user_id])
       @recipes = Recipe.where(user_id: params[:user_id]).filter_recipes(params)
     else
       @recipes = Recipe.filter_recipes(params)

@@ -1,5 +1,7 @@
 <h1>Tag: <%= @tag.name %></h1>
 
+<p>All recipes tagged with "<%= @tag.name %>" by <%= @tag.user.username %>:</p>
+
 <% if @tag.recipes.count == 0 %>
 
   <p>No recipes were found for this tag.</p>
