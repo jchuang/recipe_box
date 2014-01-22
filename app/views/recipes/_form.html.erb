@@ -25,23 +25,23 @@
     <%= f.text_area :directions, cols: 60, rows: 10 %>
   </div>
   <div class="input">
-    <%= f.label :notes %>
+    <%= f.label :notes, 'Notes (optional)' %>
     <%= f.text_field :notes %>
   </div>
   <div class="input">
-    <%= f.label :time_number, 'Time' %>
+    <%= f.label :time_number, 'Time (optional)' %>
     <%= f.text_field :time_number %>
 
     <%= f.label :time_unit, 'Unit' %>
     <%= f.select :time_unit, ['minutes', 'hours'] %>
   </div>
   <div class="input">
-    <%= f.label :servings %>
+    <%= f.label :servings, 'Servings (optional)' %>
     <%= f.text_field :servings %>
   </div>
   <% unless Tag.count == 0 %>
     <div class="input">
-      <%= f.label :tag_ids, 'Tags' %>
+      <%= f.label :tag_ids, 'Tags (optional)' %>
       <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
     </div>
   <% end %>
