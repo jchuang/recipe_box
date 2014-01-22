@@ -33,6 +33,18 @@ feature 'user profiles and related navigation', %q{
     expect(page).to have_content user1.username
   end
 
-  scenario 'user profile links to recipes and tags for that user'
+  scenario 'user profile links to recipes and tags for that user' do
+    user = FactoryGirl.create(:user)
+    recipe = FactoryGirl.create(:recipe, user: user)
+    tag = FactoryGirl.create(:tag, user: user)
+
+    visit user_path(user)
+    click_on "See #{ user.username }'s Recipes"
+    expect(page).to have_content recipe.name
+
+    visit user_path(user)
+    click_on "See #{ user.username }'s Tags"
+    expect(page).to have_content tag.name
+  end
 
 end
