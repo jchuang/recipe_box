@@ -19,18 +19,25 @@ feature 'user profiles and related navigation', %q{
 
     sign_in_user(user2)
     visit user_recipes_path(user1)
-    expect(page).to have_content user1.username
+    click_on user1.username
+    expect(page).to have_content "See #{ user1.username }'s Recipes"
+
     visit recipe_path(recipe)
-    expect(page).to have_content user1.username
+    click_on user1.username
+    expect(page).to have_content "See #{ user1.username }'s Recipes"
 
     comment = FactoryGirl.build(:comment)
     add_comment(comment, recipe)
-    expect(page).to have_content user2.username
+    click_on user2.username
+    expect(page).to have_content "See #{ user2.username }'s Recipes"
 
     visit user_tags_path(user1)
-    expect(page).to have_content user1.username
+    click_on user1.username
+    expect(page).to have_content "See #{ user1.username }'s Recipes"
+
     visit tag_path(tag)
-    expect(page).to have_content user1.username
+    click_on user1.username
+    expect(page).to have_content "See #{ user1.username }'s Recipes"
   end
 
   scenario 'user profile links to recipes and tags for that user' do

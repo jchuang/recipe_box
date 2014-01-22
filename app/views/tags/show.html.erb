@@ -1,6 +1,6 @@
 <h1>Tag: <%= @tag.name %></h1>
 
-<p>All recipes tagged with "<%= @tag.name %>" by <%= @tag.user.username %>:</p>
+<p>All recipes tagged with "<%= @tag.name %>" by <%= link_to @tag.user.username, user_path(@tag.user) %>:</p>
 
 <% if @tag.recipes.count == 0 %>
 

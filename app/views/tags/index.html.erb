@@ -1,6 +1,6 @@
 <h1>Tags</h1>
 
-<p>All tags belonging to <%= @user.username %>:</p>
+<p>All tags belonging to <%= link_to @user.username, user_path(@user) %>:</p>
 
 <% if @user == current_user %>
   <% @tags.each do |tag| %>

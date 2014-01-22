@@ -1,5 +1,5 @@
 <h1><%= @recipe.name %></h1>
-<p>posted by <%= @recipe.user.username %> on <%= @recipe.created_at.strftime("%F") %></p>
+<p>posted by <%= link_to @recipe.user.username, user_path(@recipe.user) %> on <%= @recipe.created_at.strftime("%F") %></p>
 
 <% unless @recipe.notes.blank? %>
   <p>Notes: <%= @recipe.notes %></p>
@@ -30,7 +30,7 @@
     <p>Title: <%= comment.title %></p>
   <% end %>
   <p><%= simple_format comment.body %></p>
-  <p>posted by <%= comment.user.username %> on <%= comment.created_at.strftime("%F") %></p>
+  <p>posted by <%= link_to comment.user.username, user_path(comment.user) %> on <%= comment.created_at.strftime("%F") %></p>
   <p>
     <% if comment.user == current_user %>
       <%= link_to 'Edit Comment', edit_comment_path(comment) %> |

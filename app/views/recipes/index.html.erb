@@ -1,7 +1,7 @@
 <h1>Recipes</h1>
 
 <% if @user %>
-  <p>Recipes posted by <%= @user.username %>:</p>
+  <p>Recipes posted by <%= link_to @user.username, user_path(@user) %>:</p>
 <% end %>
 
 <%= form_tag(recipes_path, method: :get) do %>
