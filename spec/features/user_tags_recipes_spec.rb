@@ -54,22 +54,20 @@ feature 'user adds tags to recipes', %q{
     end
   end
 
-  scenario 'view tags for another user' do
+  scenario 'when tag belongs to another user' do
     user1 = FactoryGirl.create(:user)
-    sign_in_user(user1)
-    tag1 = FactoryGirl.build(:tag)
-    add_tag(tag1)
-    click_on 'Sign Out'
-
     user2 = FactoryGirl.create(:user)
+    tag1 = FactoryGirl.create(:tag, user: user1)
+    tag2 = FactoryGirl.create(:tag, user: user2)
     sign_in_user(user2)
-    tag2 = FactoryGirl.build(:tag)
-    add_tag(tag2)
 
     visit user_tags_path(user1)
     expect(page).to have_content tag1.name
     expect(page).to_not have_content tag2.name
     expect(page).to_not have_content 'Edit Tag'
+    expect { visit edit_tag_path(tag1) }.to raise_error(ActionController::RoutingError,
+      'The page you requested was not found.')
+
     expect(page).to_not have_content 'Delete Tag'
     expect(page).to_not have_content 'New Tag'
 
@@ -83,10 +81,7 @@ feature 'user adds tags to recipes', %q{
 
   scenario 'when user is not authenticated' do
     user = FactoryGirl.create(:user)
-    sign_in_user(user)
-    tag = FactoryGirl.build(:tag)
-    add_tag(tag)
-    click_on 'Sign Out'
+    tag = FactoryGirl.create(:tag, user: user)
 
     visit user_tags_path(user)
     expect(page).to have_content tag.name
