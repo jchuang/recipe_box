@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "RecipeBox" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -12,24 +12,38 @@
   </head>
 
   <body>
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name"></li>
+        <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+      </ul>
+      <section class="top-bar-section">
+        <% if user_signed_in? %>
+          <ul class="left">
+            <li><%= link_to 'Home', recipes_path %></li>
+            <li><%= link_to 'My Recipes', user_recipes_path(current_user) %></li>
+            <li><%= link_to 'My Tags', user_tags_path(current_user) %></li>
+          </ul>
+          <ul class="right">
+            <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+          </ul>
+        <% else %>
+          <ul class="left">
+            <li><%= link_to 'Home', recipes_path %></li>
+            <li><%= link_to 'Create New Account', new_user_registration_path %></li>
+            <li><%= link_to 'Sign In', new_user_session_path %></li>
+          </ul>
+        <% end %>
+      </section>
+    </nav>
+    <div class="row">
+      <div class="large-12 columns">
+        <p class="notice"><%= flash[:notice] %></p>
+        <p class="alert"><%= flash[:alert] %></p>
 
-  <nav>
-    <ul>
-      <% if user_signed_in? %>
-        <li><%= link_to 'My Recipes', user_recipes_path(current_user) %></li>
-        <li><%= link_to 'My Tags', user_tags_path(current_user) %></li>
-        <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-      <% else %>
-        <li><%= link_to 'Create New Account', new_user_registration_path %></li>
-        <li><%= link_to 'Sign In', new_user_session_path %></li>
-      <% end %>
-    </ul>
-  </nav>
-
-  <p class="notice"><%= flash[:notice] %></p>
-  <p class="alert"><%= flash[:alert] %></p>
-
-    <%= yield %>
+        <%= yield %>
+      </div>
+    </div>
     <%= javascript_include_tag "application" %>
   </body>
 </html>
