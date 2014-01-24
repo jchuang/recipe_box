@@ -13,3 +13,7 @@
 
  *= require_tree .
  */
+
+body {
+  background-color: #FBECC0 !important;
+}

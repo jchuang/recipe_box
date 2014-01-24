@@ -3,7 +3,7 @@
 <%= form_for @tag do |f| %>
   <div class="input">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, autofocus: true %>
   </div>
   <div class="submit">
     <%= f.submit 'Update Tag' %>

@@ -20,19 +20,10 @@
       </p>
     </div>
 
-    <div><%= submit_tag 'Search Recipes' %></div>
+    <div><%= submit_tag 'Search Recipes', class: "button" %></div>
   <% end %>
 <% end %>
 
 <% @recipes.each do |recipe| %>
   <p><%= link_to recipe.name, recipe_path(recipe) %></p>
 <% end %>
-
-<nav>
-  <ul>
-    <% if user_signed_in? %>
-      <li><%= link_to 'Add New Recipe', new_recipe_path %></li>
-    <% end %>
-    <li><%= link_to 'Show All Recipes', recipes_path %></li>
-  </ul>
-</nav>
