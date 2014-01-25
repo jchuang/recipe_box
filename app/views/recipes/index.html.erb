@@ -10,13 +10,14 @@
     <div class="row">
       <div class="large-12 columns">
         <%= label_tag 'keywords' %>
-        <%= text_field_tag 'keywords', params[:keywords], placeholder: 'Search recipe name, ingredients, and directions', size: 50 %>
+        <%= text_field_tag 'keywords', params[:keywords], placeholder: 'Search recipe name, ingredients, and directions',
+          size: 50, autofocus: true %>
       </div>
     </div>
     <div class="row">
       <div class="large-3 columns">
         <%= label_tag 'minutes', 'Maximum Time (minutes)' %>
-        <%= text_field_tag 'minutes', params[:minutes], placeholder: '30', size: 4 %>
+        <%= text_field_tag 'minutes', params[:minutes], size: 4 %>
       </div>
     </div>
     <div class="row">

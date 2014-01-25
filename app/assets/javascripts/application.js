@@ -16,4 +16,13 @@
 //= require turbolinks
 //= require_tree .
 
-$(function(){ $(document).foundation(); });
+// $(function(){ $(document).foundation(); });
+
+$(document).ready(function() {
+  $(document).foundation();
+
+  $('#clear-form').on('click', function(event) {
+    $('#keywords').val('');
+    $('#minutes').val('');
+  });
+});
