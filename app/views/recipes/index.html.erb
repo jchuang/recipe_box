@@ -6,21 +6,27 @@
 <% end %>
 
 <%= form_tag(recipes_path, method: :get) do %>
-  <%= field_set_tag 'Search' do %>
-
-    <div>
-      <p>
-        <%= label_tag 'keywords', 'Keywords:' %>
+  <%= field_set_tag do %>
+    <div class="row">
+      <div class="large-12 columns">
+        <%= label_tag 'keywords' %>
         <%= text_field_tag 'keywords', params[:keywords], placeholder: 'Search recipe name, ingredients, and directions', size: 50 %>
-      </p>
+      </div>
     </div>
-    <div>
-      <p>
-        Maximum time: <%= text_field_tag 'minutes', params[:minutes], placeholder: '30', size: 4 %> minutes
-      </p>
+    <div class="row">
+      <div class="large-3 columns">
+        <%= label_tag 'minutes', 'Maximum Time (minutes)' %>
+        <%= text_field_tag 'minutes', params[:minutes], placeholder: '30', size: 4 %>
+      </div>
     </div>
-
-    <div><%= submit_tag 'Search Recipes', class: "button" %></div>
+    <div class="row">
+      <div class="large-5 large-centered columns">
+        <ul class="button-group">
+          <li><%= submit_tag 'Search Recipes', class: "button" %></li>
+          <li><input id="clear-form" class="button" type="submit" value="Clear Form"></li>
+        </ul>
+      </div>
+    </div>
   <% end %>
 <% end %>
 
