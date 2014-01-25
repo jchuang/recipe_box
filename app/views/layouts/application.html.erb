@@ -47,8 +47,15 @@
     </nav>
     <div class="row">
       <div class="large-12 columns">
-        <p class="notice"><%= flash[:notice] %></p>
-        <p class="alert"><%= flash[:alert] %></p>
+
+        <% flash.each do |name, msg| %>
+          <% if msg.is_a?(String) %>
+            <div data-alert class="alert-box <%= name == :notice ? "info" : "alert" %>">
+              <%= content_tag :div, msg %>
+              <a href="#" class="close">&times;</a>
+            </div>
+          <% end %>
+        <% end %>
 
         <%= yield %>
       </div>
