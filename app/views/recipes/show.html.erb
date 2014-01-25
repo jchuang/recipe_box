@@ -1,27 +1,45 @@
 <h1><%= @recipe.name %></h1>
-<p>posted by <%= link_to @recipe.user.username, user_path(@recipe.user) %> on <%= @recipe.created_at.strftime("%F") %></p>
 
-<nav>
-  <ul>
+<div class="row">
+  <div class="medium-5 columns">
+    <p>posted by <%= link_to @recipe.user.username, user_path(@recipe.user) %> on <%= @recipe.created_at.strftime("%F") %></p>
+
     <% if @recipe.user == current_user %>
-      <li><%= link_to 'Edit Recipe', edit_recipe_path(@recipe) %></li>
-      <li><%= link_to 'Delete Recipe', recipe_path(@recipe), method: :delete,
-        data: { confirm: 'Are you sure you want to delete this recipe?' } %></li>
+      <ul class="button-group">
+        <li><%= link_to 'Edit Recipe', edit_recipe_path(@recipe), class: "button small" %></li>
+        <li><%= link_to 'Delete Recipe', recipe_path(@recipe), method: :delete,
+          data: { confirm: 'Are you sure you want to delete this recipe?' }, class: "button small" %></li>
+      </ul>
     <% end %>
-  </ul>
-</nav>
-
-<% unless @recipe.notes.blank? %>
-  <p>Notes: <%= @recipe.notes %></p>
-<% end %>
-
-<% unless @recipe.time_in_minutes.blank? %>
-  <p>Time: <%= @recipe.time_number %> <%= @recipe.time_unit %></p>
-<% end %>
-
-<% unless @recipe.servings.blank? %>
-  <p>Servings: <%= @recipe.servings %></p>
-<% end %>
+  </div>
+  <div class="medium-7 columns">
+    <div class="row">
+      <div class="medium-4 columns">
+        <% unless @recipe.time_in_minutes.blank? %>
+          <p>Time: <%= @recipe.time_number %>
+            <% if @recipe.time_number == '1' %>
+              <%= @recipe.time_unit.singularize %>
+            <% else %>
+              <%= @recipe.time_unit %>
+            <% end %>
+          </p>
+        <% end %>
+      </div>
+      <div class="medium-8 columns">
+        <% unless @recipe.servings.blank? %>
+          <p>Servings: <%= @recipe.servings %></p>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="medium-12 columns">
+        <% unless @recipe.notes.blank? %>
+          <p><em><%= @recipe.notes %></em></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <h2>Ingredients</h2>
 <p><%= simple_format @recipe.ingredients %></p>
@@ -30,17 +48,18 @@
 <p><%= simple_format @recipe.directions %></p>
 
 <% unless @recipe.tags.count == 0 %>
-  <p>Tags: <%= @recipe.tags.map { |tag| tag.name }.join(', ') %></p>
+  <h2>Tags</h2>
+  <p><%= @recipe.tags.map { |tag| tag.name }.join(', ') %></p>
 <% end %>
 
 <h2>Comments</h2>
 <% @comments.each do |comment| %>
 
   <% unless comment.title.blank? %>
-    <p>Title: <%= comment.title %></p>
+    <h3><%= comment.title %></h3>
   <% end %>
   <p><%= simple_format comment.body %></p>
-  <p>posted by <%= link_to comment.user.username, user_path(comment.user) %> on <%= comment.created_at.strftime("%F") %></p>
+  <p><em>posted by <%= link_to comment.user.username, user_path(comment.user) %> on <%= comment.created_at.strftime("%F") %></em></p>
   <p>
     <% if comment.user == current_user %>
       <%= link_to 'Edit Comment', edit_comment_path(comment) %> |
@@ -63,7 +82,7 @@
       <%= f.text_area :body, cols: 30, rows: 5 %>
     </div>
     <div class="submit">
-      <%= f.submit 'Add Comment' %>
+      <%= f.submit 'Add Comment', class: "button small" %>
     </div>
   <% end %>
 <% end %>
