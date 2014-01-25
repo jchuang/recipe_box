@@ -7,11 +7,11 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      redirect_to recipe_path(@recipe),
-        notice: 'Your comment was successfully added.'
+      flash[:notice] = 'Your comment was successfully added.'
+      redirect_to recipe_path(@recipe)
     else
-      redirect_to recipe_path(@recipe),
-        notice: 'There was an issue with your comment. Please try again.'
+      flash[:alert] = 'There was an issue with your comment. Please try again.'
+      redirect_to recipe_path(@recipe)
     end
   end
 
@@ -40,7 +40,8 @@ class CommentsController < ApplicationController
     authorize_user(@comment)
     @recipe = @comment.recipe
     @comment.destroy
-    redirect_to recipe_path(@recipe), notice: 'Your comment was successfully deleted.'
+    flash[:notice] = 'Your comment was successfully deleted.'
+    redirect_to recipe_path(@recipe)
   end
 
   private

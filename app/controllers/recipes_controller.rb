@@ -26,8 +26,10 @@ class RecipesController < ApplicationController
     @recipe.user = current_user
 
     if @recipe.save
-      redirect_to recipe_path(@recipe), notice: 'Recipe was successfully added.'
+      flash[:notice] = 'Recipe was successfully added.'
+      redirect_to recipe_path(@recipe)
     else
+      flash.now[:alert] = 'There was an issue with your recipe. Please try again.'
       render :new
     end
   end
@@ -42,8 +44,10 @@ class RecipesController < ApplicationController
     authorize_user(@recipe)
 
     if @recipe.update(recipe_params)
-      redirect_to recipe_path(@recipe), notice: 'Recipe was successfully updated.'
+      flash[:notice] = 'Recipe was successfully updated.'
+      redirect_to recipe_path(@recipe)
     else
+      flash.now[:alert] = 'There was an issue with your recipe. Please try again.'
       render :edit
     end
   end
@@ -53,7 +57,8 @@ class RecipesController < ApplicationController
     authorize_user(@recipe)
 
     @recipe.destroy
-    redirect_to recipes_path, notice: 'Recipe was successfully deleted.'
+    flash[:notice] = 'Recipe was successfully deleted.'
+    redirect_to recipes_path
   end
 
   private

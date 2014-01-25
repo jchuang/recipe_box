@@ -17,9 +17,11 @@ class TagsController < ApplicationController
     @tag.user = current_user
 
     if @tag.save
-      redirect_to user_tags_path(current_user), notice: 'Your tag was successfully added.'
+      flash[:notice] = 'Your tag was successfully added.'
+      redirect_to user_tags_path(current_user)
     else
-      redirect_to user_tags_path(current_user), notice: 'There was an issue with your tag. Please try again.'
+      flash[:alert] = 'There was an issue with your tag. Please try again.'
+      redirect_to user_tags_path(current_user)
     end
   end
 
@@ -33,9 +35,11 @@ class TagsController < ApplicationController
     authorize_user(@tag)
 
     if @tag.update(tag_params)
-      redirect_to user_tags_path(current_user), notice: 'Your tag was successfully updated.'
+      flash[:notice] = 'Your tag was successfully updated.'
+      redirect_to user_tags_path(current_user)
     else
-      render :edit, notice: 'There was an issue with your tag. Please try again.'
+      flash[:alert] = 'There was an issue with your tag. Please try again.'
+      render :edit
     end
   end
 
@@ -44,7 +48,8 @@ class TagsController < ApplicationController
     authorize_user(@tag)
 
     @tag.destroy
-    redirect_to user_tags_path(current_user), notice: 'Your tag was successfully deleted.'
+    flash[:notice] = 'Your tag was successfully deleted.'
+    redirect_to user_tags_path(current_user)
   end
 
   private
