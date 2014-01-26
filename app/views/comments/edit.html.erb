@@ -9,13 +9,16 @@
     <%= f.label :body, 'Comment Text' %>
     <%= f.text_area :body, cols: 30, rows: 5 %>
   </div>
-  <div class="submit">
-    <%= f.submit 'Update Comment' %>
+  <div class="row">
+    <div class="medium-12 columns">
+      <ul class="button-group">
+        <li>
+          <div class="submit">
+            <%= f.submit 'Update Comment', class: "button small" %>
+          </div>
+        </li>
+        <li><%= link_to 'Back to Recipe', recipe_path(@recipe), class: "button small" %></li>
+      </ul>
+    </div>
   </div>
 <% end %>
-
-<nav>
-  <ul>
-    <li><%= link_to 'Back to Recipe', recipe_path(@recipe) %></li>
-  </ul>
-</nav>
