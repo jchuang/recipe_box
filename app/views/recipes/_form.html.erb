@@ -12,13 +12,9 @@
 
 <%= form_for @recipe do |f| %>
 
-  <div class="row">
-    <div class="small-6 columns">
-      <div class="input">
-        <%= f.label :name %>
-        <%= f.text_field :name, autofocus: true %>
-      </div>
-    </div>
+  <div class="input">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
   </div>
   <div class="input">
     <%= f.label :ingredients %>
@@ -33,22 +29,19 @@
     <%= f.text_field :notes %>
   </div>
   <div class="row">
-    <div class="small-6 medium-3 columns">
+    <div class="medium-3 large-2 columns">
       <div class="input">
         <%= f.label :time_number, 'Time (optional)' %>
         <%= f.text_field :time_number %>
       </div>
     </div>
-    <div class="small-6 medium-3 columns">
+    <div class="medium-3 large-2 columns">
       <div class="input">
         <%= f.label :time_unit, 'Unit' %>
         <%= f.select :time_unit, ['minutes', 'hours'] %>
       </div>
     </div>
-    <div class="medium-6 columns"></div>
-  </div>
-  <div class="row">
-    <div class="small-6 medium-3 columns">
+    <div class="medium-3 large-2 columns">
       <div class="input">
         <%= f.label :servings, 'Servings (optional)' %>
         <%= f.text_field :servings %>
@@ -62,7 +55,8 @@
     </div>
   <% end %>
   <div class="submit">
-    <%= f.submit class: "button" %>
+    <%= f.submit class: "button small" %>
   </div>
+</div>
 
 <% end %>
