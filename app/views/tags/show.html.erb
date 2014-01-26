@@ -1,15 +1,15 @@
-<h1>Tag: <%= @tag.name %></h1>
+<h1><%= @tag.name %></h1>
 
-<p>All recipes tagged with "<%= @tag.name %>" by <%= link_to @tag.user.username, user_path(@tag.user) %>:</p>
+<div id="tag-intro">
+  <p>All recipes tagged with "<%= @tag.name %>" by <%= link_to @tag.user.username, user_path(@tag.user) %>:</p>
+</div>
 
 <% if @tag.recipes.count == 0 %>
-
   <p>No recipes were found for this tag.</p>
-
 <% else %>
-
   <% @tag.recipes.each do |recipe| %>
     <p><%= link_to recipe.name, recipe_path(recipe) %></p>
   <% end %>
-
 <% end %>
+
+<%= link_to 'Back to Tags', user_tags_path(@tag.user), class: "button small" %>

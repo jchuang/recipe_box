@@ -1,17 +1,24 @@
-<h3>Edit Tag</h3>
+<h2>Edit Tag</h2>
 
 <%= form_for @tag do |f| %>
-  <div class="input">
-    <%= f.label :name %>
-    <%= f.text_field :name, autofocus: true %>
+  <div id="tag-form-input">
+    <div class="input">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
   </div>
-  <div class="submit">
-    <%= f.submit 'Update Tag' %>
+  <div class="row">
+    <div class="medium-12 columns">
+      <div id="tag-form-button">
+        <ul class="button-group">
+          <li>
+            <div class="submit">
+              <%= f.submit 'Update Tag', class: "button small" %>
+            </div>
+          </li>
+          <li><%= link_to 'Back to Tags', user_tags_path(@tag.user), class: "button small" %></li>
+        </ul>
+      </div>
+    </div>
   </div>
 <% end %>
-
-<nav>
-  <ul>
-    <li><%= link_to 'Back to Tags', user_tags_path(@tag.user) %></li>
-  </ul>
-</nav>

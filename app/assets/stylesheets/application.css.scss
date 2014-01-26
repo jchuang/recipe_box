@@ -30,6 +30,14 @@
   float: right;
 }
 
+.tag-buttons {
+  float: right;
+}
+
+.tag-link p {
+  padding-top: 0.4rem;
+}
+
 #page-content {
   padding-top: 1rem;
 }
@@ -64,8 +72,16 @@
   padding-top: 1rem;
 }
 
-#profile-links p {
-  font-size: 1.2rem;
+#tag-intro {
+  padding-top: 0.6rem;
+}
+
+#tag-form-button {
+  padding-top: 0.6rem;
+}
+
+#tag-form-input {
+  padding-top: 0.6rem;
 }
 
 textarea {
