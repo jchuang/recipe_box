@@ -58,19 +58,16 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="row">
-  <div class="medium-12 columns">
-    <div id="recipe-tags-container">
-      <% unless @recipe.tags.count == 0 %>
-        <h2>Tags</h2>
-        <p><%= @recipe.tags.map { |tag| tag.name }.join(', ') %></p>
-      <% end %>
+  <div class="row">
+    <div class="medium-12 columns">
+      <div id="recipe-tags-container">
+        <% unless @recipe.tags.count == 0 %>
+          <p><strong>Tags:</strong> <%= @recipe.tags.map { |tag| tag.name }.join(', ') %></p>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
-
 
 <h2>Comments</h2>
 <% @comments.each do |comment| %>
