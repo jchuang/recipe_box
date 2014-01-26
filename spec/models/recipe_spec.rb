@@ -36,5 +36,21 @@ describe Recipe do
       expect(recipe.time_in_minutes).to eq(90)
     end
 
+    it 'sets the new time when time is edited' do
+      recipe = FactoryGirl.create(:recipe, time_in_minutes: 45)
+      recipe.time_number = '30'
+      recipe.time_unit = 'minutes'
+
+      recipe.save
+      expect(recipe.time_in_minutes).to eq(30)
+    end
+  end
+
+  it 'resets the time when time is removed' do
+    recipe = FactoryGirl.create(:recipe, time_in_minutes: 45)
+    recipe.time_number = ''
+
+    recipe.save
+    expect(recipe.time_in_minutes).to be_nil
   end
 end

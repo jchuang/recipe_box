@@ -15,8 +15,8 @@
     </div>
     <div class="medium-7 columns">
       <div class="row">
-        <div class="medium-4 columns">
-          <% unless @recipe.time_in_minutes.blank? %>
+        <% unless @recipe.time_in_minutes.blank? %>
+          <div class="medium-4 columns">
             <p>Time: <%= @recipe.time_number %>
               <% if @recipe.time_number == '1' %>
                 <%= @recipe.time_unit.singularize %>
@@ -24,8 +24,8 @@
                 <%= @recipe.time_unit %>
               <% end %>
             </p>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
         <div class="medium-8 columns">
           <% unless @recipe.servings.blank? %>
             <p>Servings: <%= @recipe.servings %></p>

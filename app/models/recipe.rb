@@ -33,8 +33,9 @@ class Recipe < ActiveRecord::Base
   private
 
   def calculate_time
-    unless time_number.blank?
-
+    if time_number.blank?
+      self.time_in_minutes = nil
+    else
       case time_unit
       when 'minutes'
         self.time_in_minutes = time_number.to_i
