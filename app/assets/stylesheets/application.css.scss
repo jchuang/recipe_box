@@ -22,6 +22,24 @@
   padding-top: 1rem;
 }
 
+#recipe-intro-container {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dotted black;
+}
+
+#recipe-ingredients-container {
+  padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+}
+
+#recipe-directions-container {
+  padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+}
+
+#recipe-main-container {
+  border-bottom: 1px dotted black;
+}
+
 textarea {
   height: auto !important;
 }
