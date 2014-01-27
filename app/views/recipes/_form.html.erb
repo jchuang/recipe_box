@@ -13,25 +13,25 @@
 <%= form_for @recipe do |f| %>
 
   <div class="input">
-    <%= f.label :name %>
+    <%= f.label :name, 'Name (required)' %>
     <%= f.text_field :name %>
   </div>
   <div class="input">
-    <%= f.label :ingredients %>
+    <%= f.label :ingredients, 'Ingredients (required)' %>
     <%= f.text_area :ingredients, cols: 60, rows: 6 %>
   </div>
   <div class="input">
-    <%= f.label :directions %>
+    <%= f.label :directions, 'Directions (required)' %>
     <%= f.text_area :directions, cols: 60, rows: 6 %>
   </div>
   <div class="input">
-    <%= f.label :notes, 'Notes (optional)' %>
+    <%= f.label :notes %>
     <%= f.text_field :notes %>
   </div>
   <div class="row">
     <div class="medium-3 large-2 columns">
       <div class="input">
-        <%= f.label :time_number, 'Time (optional)' %>
+        <%= f.label :time_number, 'Time' %>
         <%= f.text_field :time_number %>
       </div>
     </div>
@@ -41,16 +41,16 @@
         <%= f.select :time_unit, ['minutes', 'hours'] %>
       </div>
     </div>
-    <div class="medium-3 large-2 columns">
+    <div class="medium-6 large-4 columns">
       <div class="input">
-        <%= f.label :servings, 'Servings (optional)' %>
+        <%= f.label :servings %>
         <%= f.text_field :servings %>
       </div>
     </div>
   </div>
   <% unless Tag.count == 0 %>
     <div class="input">
-      <%= f.label :tag_ids, 'Tags (optional)' %>
+      <%= f.label :tag_ids, 'Tags' %>
       <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
     </div>
   <% end %>
