@@ -24,5 +24,6 @@ $(document).ready(function() {
   $('#clear-form').on('click', function(event) {
     $('#keywords').val('');
     $('#minutes').val('');
+    $('#clear-form').blur();
   });
 });
