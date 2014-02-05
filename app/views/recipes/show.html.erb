@@ -79,6 +79,9 @@
     </div>
   </div>
   <div id="single-comment-container">
+    <% if !user_signed_in? && @comments.size == 0 %>
+      <p>This recipe currently has no comments. To add a comment, please <%= link_to 'sign in', new_user_session_path %> or <%= link_to 'create an account', new_user_registration_path %>.</p>
+    <% end %>
     <% @comments.each do |comment| %>
       <div class="row">
         <div class="medium-12 columns">
