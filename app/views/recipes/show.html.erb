@@ -88,14 +88,18 @@
         </div>
       </div>
       <div class="row">
-        <div class="medium-6 large-8 columns">
-          <div class="comment-body">
-            <%= simple_format comment.body %>
+        <% if comment.user == current_user %>
+          <div class="medium-6 large-8 columns">
+        <% else %>
+          <div class="medium-12 columns">
+        <% end %>
+            <div class="comment-body">
+              <%= simple_format comment.body %>
+            </div>
+            <div class="comment-info">
+              <em>posted by <%= link_to comment.user.username, user_path(comment.user) %> on <%= comment.created_at.strftime("%F") %></em>
+            </div>
           </div>
-          <div class="comment-info">
-            <em>posted by <%= link_to comment.user.username, user_path(comment.user) %> on <%= comment.created_at.strftime("%F") %></em>
-          </div>
-        </div>
         <% if comment.user == current_user %>
           <div class="medium-6 large-4 columns">
             <div class="comment-buttons">
